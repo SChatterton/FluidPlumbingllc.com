@@ -1,0 +1,73 @@
+---
+import HeadingSection from "./HeadingSection.astro";
+import { Icon } from "astro-icon/components";
+
+export interface BenefitItem {
+  icon: string;        // contoh: "bi:shield-check"
+  title: string;       // contoh: "ISO 45001:2018"
+  description: string; // contoh: "Occupational Health & Safety Management"
+}
+
+export interface Props {
+  label?: string;
+  title?: string;
+  description?: string;
+  items?: BenefitItem[];
+}
+
+const {
+  label,
+  title,
+  description,
+
+  items = [
+    {
+      icon: "bi:shield-check",
+      title: "ISO 45001:2018",
+      description: "Occupational Health & Safety Management",
+    },
+    {
+      icon: "bi:award",
+      title: "OSHA 10 Certified",
+      description: "Government Safety Management System",
+    },
+    {
+      icon: "bi:person-check",
+      title: "Certified Operators",
+      description:
+        "All operators hold valid SIO & heavy equipment licenses",
+    },
+    {
+      icon: "bi:calendar-check",
+      title: "Daily Safety Briefing",
+      description:
+        "Toolbox meeting & equipment checklist every morning",
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="bg-dark relative text-white">
+  <div class="h-1 pipe-divider"></div>
+  <div class="max-w-7xl mx-auto px-4 relative py-16 lg:py-20">
+    <!-- HEADING -->
+    <HeadingSection
+      label={label}
+      title={title}
+      description={description}
+      align="center"
+      variant="light"
+    />
+    <!-- GRID -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+      {items.map((item) => (
+        <div class="flex flex-col items-center">
+          <Icon name={item.icon} class="text-6xl text-primary mb-4" />
+          <h3 class="text-xl md:text-2xl font-bold mb-2">{item.title}</h3>
+          <p class="text-metal-gray">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+  <div class="h-1 pipe-divider"></div>
+</section>

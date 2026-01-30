@@ -1,0 +1,89 @@
+---
+export interface StepItem {
+  number: string | number; // contoh: 1, 2, 3, "A"
+  title: string;
+  description: string;
+}
+
+export interface Props {
+  title?: string;
+  description?: string;
+  steps?: StepItem[];
+}
+
+const {
+  title = "OUR PROCESS",
+  description = "Transparent, fast, and reliable — from first contact to project completion",
+
+  steps = [
+    {
+      number: 1,
+      title: "Consultation",
+      description: "Site visit & needs assessment within 24 hours",
+    },
+    {
+      number: 2,
+      title: "Planning",
+      description: "Equipment selection & schedule optimization",
+    },
+    {
+      number: 3,
+      title: "Quotation",
+      description: "Detailed & transparent quote within 4 hours",
+    },
+    {
+      number: 4,
+      title: "Deployment",
+      description: "Unit & operator arrive on site on agreed date",
+    },
+    {
+      number: 5,
+      title: "Execution",
+      description: "Daily reports & 24/7 on-site support",
+    },
+    {
+      number: 6,
+      title: "Completion",
+      description: "Handover, final inspection & demobilization",
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="bg-dark relative text-white">
+  <div class="h-1 pipe-divider"></div>
+  <div class="max-w-7xl mx-auto px-4 relative py-16 lg:py-20">
+    <!-- HEADING -->
+    <div class="text-center mb-16">
+      <h2 class="font-display text-4xl md:text-5xl text-white mb-4">
+        {title}
+      </h2>
+
+      {description && (
+        <p class="text-metal-gray text-lg max-w-3xl mx-auto">
+          {description}
+        </p>
+      )}
+    </div>
+
+    <!-- GRID STEPS -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-6 gap-8">
+      {steps.map((step) => (
+        <div class="text-center">
+
+          <!-- NUMBER CIRCLE -->
+          <div class="w-20 h-20 mx-auto mb-6 bg-primary text-white rounded-full flex items-center justify-center text-3xl font-bold">
+            {step.number}
+          </div>
+
+          <!-- STEP TITLE -->
+          <h3 class="text-xl font-bold mb-3">{step.title}</h3>
+
+          <!-- STEP DESCRIPTION -->
+          <p class="text-metal-gray">{step.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+  <div class="h-1 pipe-divider"></div>
+</section>

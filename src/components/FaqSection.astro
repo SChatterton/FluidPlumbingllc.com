@@ -1,0 +1,76 @@
+---
+import HeadingSection from "./HeadingSection.astro";
+import FaqItem from "./FaqItem.astro";
+
+export interface FaqEntry {
+  question: string;
+  answer: string;
+}
+
+export interface Props {
+  label?: string;
+  title?: string;
+  faqs?: FaqEntry[];
+}
+
+const {
+  label = "FAQ",
+  title = "FREQUENTLY ASKED QUESTIONS",
+
+  faqs = [
+    {
+      question: "Do your rental rates include certified operators?",
+      answer:
+        "Yes. All equipment can be rented with experienced, OSHA-trained operators. Bare rental is available depending on machine type.",
+    },
+    {
+      question: "What is your minimum rental duration?",
+      answer:
+        "Minimum 1 day for small equipment, and 3–7 days for large machinery. Monthly rentals include discounts.",
+    },
+    {
+      question: "Is mobilization and demobilization included?",
+      answer:
+        "Quoted separately based on distance, equipment size, and access. We provide competitive rates nationwide.",
+    },
+    {
+      question: "Are your machines regularly maintained?",
+      answer:
+        "Absolutely. All units undergo preventive maintenance and safety checks before deployment.",
+    },
+    {
+      question: "Do you assist with permits and safety compliance?",
+      answer:
+        "Yes. We support OSHA compliance, certifications, lifting plans, and necessary site documentation.",
+    },
+    {
+      question: "What types of projects do you handle?",
+      answer:
+        "We work across commercial, industrial, mining, infrastructure, utilities, and large-scale developments.",
+    },
+    {
+      question: "How fast can your equipment be deployed?",
+      answer:
+        "Typically 24–48 hours. Same-day deployment available for urgent jobs based on fleet availability.",
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- HEADING -->
+    <HeadingSection
+      label={label}
+      title={title}
+      align="center"
+    />
+
+    <!-- FAQ LIST -->
+    <div class="max-w-4xl mx-auto space-y-6">
+      {faqs.map((item) => (
+        <FaqItem question={item.question} answer={item.answer} />
+      ))}
+    </div>
+  </div>
+</section>

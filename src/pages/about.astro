@@ -1,0 +1,26 @@
+---
+import AboutPage from '@src/components/AboutPage.astro';
+import BenefitSection from '@src/components/BenefitSection.astro';
+import StatsSection from '@src/components/StatsSection.astro';
+import StorySection from '@src/components/StorySection.astro';
+import VisionSection from '@src/components/VisionSection.astro';
+import MainLayout from '@src/layouts/MainLayout.astro';
+---
+<MainLayout title="Constructors - Professional Construction Solutions">
+  <AboutPage />
+  <StatsSection />
+  <StorySection
+    label="Our Journey"
+    title="BUILDING CALIFORNIA SINCE 1998"
+    description="From a small equipment yard in Southern California to becoming one of the most trusted heavy construction partners."
+    />
+  <BenefitSection
+    label="SAFETY FIRST"
+    title="ZERO ACCIDENT COMMITMENT"
+    description="Safety is non-negotiable. We maintain the highest international standards."
+    />
+  <VisionSection
+    label="Vision & Mission"
+    title="OUR VISION, MISSION & CORE VALUES"
+    />
+</MainLayout>

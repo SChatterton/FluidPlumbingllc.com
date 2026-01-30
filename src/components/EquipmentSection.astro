@@ -1,0 +1,52 @@
+---
+import { getCollection } from "astro:content";
+import HeadingSection from "@src/components/HeadingSection.astro";
+import EquipmentCard from "@src/components/EquipmentCard.astro";
+import Pagination from "@src/components/Pagination.astro";
+
+// Get all equipment
+const allEquipment = await getCollection("equipment");
+
+// Sort equipment by order and filter drafts
+const equipment = allEquipment
+  .filter((item) => !item.data.draft)
+  .sort((a, b) => {
+    // Sort by order first, then by title
+    if (a.data.order !== b.data.order) {
+      return a.data.order - b.data.order;
+    }
+    return a.data.title.localeCompare(b.data.title);
+  });
+
+// Pagination settings
+const maxPerPage = 9;
+const currentPage = 1;
+
+// Calculate total pages
+const totalPages = Math.ceil(equipment.length / maxPerPage);
+
+// Get visible equipment for current page
+const visibleEquipment = equipment.slice(0, maxPerPage);
+---
+
+<section class="py-20 bg-bg-soft" id="equipment">
+  <HeadingSection label="Equipment Fleet" title="HEAVY MACHINERY" description="Explore Our Extensive Range of Construction Equipment" />
+  
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {visibleEquipment.map((item) => (
+        <EquipmentCard equipment={item} />
+      ))}
+    </div>
+
+    {totalPages > 1 && (
+      <div class="flex justify-center mt-16">
+        <Pagination 
+          currentPage={currentPage} 
+          totalPages={totalPages} 
+          basePath="/equipment" 
+        />
+      </div>
+    )}
+  </div>
+</section>

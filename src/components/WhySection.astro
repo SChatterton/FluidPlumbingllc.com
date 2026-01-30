@@ -1,0 +1,82 @@
+---
+import { Icon } from "astro-icon/components";
+import HeadingSection from "./HeadingSection.astro";
+
+export interface WhyItem {
+  icon: string;       // bi:shield-check
+  title: string;      // "100% Certified"
+  description: string; 
+}
+
+export interface Props {
+  label?: string;
+  title?: string;
+  items?: WhyItem[];
+  bgPattern?: string;
+}
+
+const {
+  label,
+  title,
+  items = [
+    {
+      icon: "bi:shield-check",
+      title: "100% Certified",
+      description:
+        "All equipment & operators fully insured and comply with ISO 9001, ISO 45001 & OSHA 10",
+    },
+    {
+      icon: "bi:clock-history",
+      title: "24/7 Support",
+      description:
+        "Emergency breakdown service & replacement unit within 4 hours nationwide",
+    },
+    {
+      icon: "bi:currency-dollar",
+      title: "Transparent Pricing",
+      description:
+        "No hidden fees. Fuel, operator & maintenance options clearly stated upfront",
+    },
+    {
+      icon: "bi:truck-front",
+      title: "Nationwide Delivery",
+      description:
+        "Fast and affordable equipment delivery across all 50 states, including remote project locations.",
+    },
+  ],
+  bgPattern = "/img/pattern-light.png",
+} = Astro.props;
+---
+
+<section class="bg-dark-deep text-white relative">
+  <!-- BG PATTERN -->
+  <div
+    class="absolute inset-0 bg-repeat opacity-[0.02]"
+    style={`background-image: url('${bgPattern}')`}
+  ></div>
+  <div class="h-1 pipe-divider"></div>
+  <div class="max-w-7xl mx-auto relative px-4 py-16 lg:py-20">
+    <!-- HEADING -->
+    <HeadingSection
+      label={label}
+      title={title}
+      align="center"
+      variant="light"
+    />
+
+    <!-- WHY GRID -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+      {items.map((item) => (
+        <div class="text-center">
+          <div class="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
+            <Icon name={item.icon} class="text-4xl" />
+          </div>
+
+          <h3 class="text-2xl font-bold mb-3">{item.title}</h3>
+          <p class="text-metal-gray">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+  <div class="h-1 pipe-divider"></div>
+</section>

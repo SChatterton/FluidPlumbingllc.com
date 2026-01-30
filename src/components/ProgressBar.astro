@@ -1,0 +1,23 @@
+---
+export interface Props {
+  label: string;
+  value: number; // 0–100
+  duration?: number;
+}
+
+const { label, value, duration = 1500 } = Astro.props;
+---
+
+<div data-progress={value} data-duration={duration}>
+  <div class="flex items-center justify-between gap-3 mb-2">
+    <p class="font-semibold text-dark">{label}</p>
+    <span>{value}%</span>
+  </div>
+
+  <div class="w-full bg-steel-dark/20 rounded-full h-3 overflow-hidden">
+    <div
+      class="progress-fill bg-primary h-3 rounded-full"
+      style="width: 0%"
+    ></div>
+  </div>
+</div>

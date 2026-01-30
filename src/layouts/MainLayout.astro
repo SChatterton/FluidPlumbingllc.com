@@ -1,0 +1,77 @@
+---
+import Header from '@src/components/Header.astro'
+import Footer from '@src/components/Footer.astro'
+import { Icon } from 'astro-icon/components'
+
+import 'glightbox/dist/css/glightbox.min.css'
+import '@src/styles/style.css'
+import BackToTop from '@src/components/BackToTop.astro'
+
+interface Props {
+	title: string
+	description?: string
+}
+
+const {
+	title = 'Fluid Plumbing | Residential Plumber in Dayton & Kettering',
+	description = 'Need a reliable plumber in Dayton or Kettering? Fluid Plumbing offers honest pricing, fast, clean service — $50 off first-time customers!'
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+
+		<!-- Primary Meta -->
+		<meta name="description" content={description} />
+		<meta name="author" content="Author Name" />
+		<meta name="robots" content="index, follow" />
+
+		<link rel="canonical" href={Astro.url?.href || 'https://www.fluidplumbingllc.com'} />
+		<link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bebas+Neue&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+
+	<body class="font-sans bg-white overflow-x-hidden">
+		<Header />
+		<main>
+			<slot />
+		</main>
+		<Footer />
+		<BackToTop />
+
+		<!-- Alpine.js -->
+		<script>
+			import Alpine from 'alpinejs'
+			declare global {
+				interface Window {
+					Alpine: typeof Alpine
+				}
+			}
+			window.Alpine = Alpine
+			Alpine.start()
+		</script>
+
+		<!-- GLightbox -->
+		<script>
+			import GLightbox from 'glightbox'
+
+			const hasLightbox = document.querySelector('.glightbox')
+			if (hasLightbox) {
+				GLightbox({
+					selector: '.glightbox',
+					touchNavigation: true,
+					loop: true
+				})
+			}
+		</script>
+
+		<script src="@src/scripts/animation.ts"></script>
+	</body>
+</html>

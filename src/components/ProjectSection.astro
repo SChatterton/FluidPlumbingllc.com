@@ -1,0 +1,50 @@
+---
+import { getCollection } from "astro:content";
+import HeadingSection from "@src/components/HeadingSection.astro";
+import ProjectCard from "@src/components/ProjectCard.astro";
+import Pagination from "@src/components/Pagination.astro";
+
+// Get all projects
+const allProjects = await getCollection("project");
+
+// Sort projects by order and filter drafts
+const projects = allProjects
+  .filter((project) => !project.data.draft)
+  .sort((a, b) => {
+    // Sort by order first, then by title
+    if (a.data.order !== b.data.order) {
+      return a.data.order - b.data.order;
+    }
+    return a.data.title.localeCompare(b.data.title);
+  });
+
+// Pagination settings
+const maxPerPage = 9;
+const currentPage = 1;
+
+// Calculate total pages
+const totalPages = Math.ceil(projects.length / maxPerPage);
+
+// Get visible projects for current page
+const visibleProjects = projects.slice(0, maxPerPage);
+---
+<section class="py-20 bg-bg-soft">
+  <HeadingSection label="Our Projects" title="RECENT FEATURED PROJECTS" description="Discover Our Portfolio of Successful Construction Projects" />
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {visibleProjects.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+
+    {totalPages > 1 && (
+      <div class="flex justify-center mt-16">
+        <Pagination 
+          currentPage={currentPage} 
+          totalPages={totalPages} 
+          basePath="/project" 
+        />
+      </div>
+    )}
+  </div>
+</section>

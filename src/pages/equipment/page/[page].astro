@@ -1,0 +1,57 @@
+---
+import MainLayout from "@src/layouts/MainLayout.astro";
+import EquipmentCard from "@src/components/EquipmentCard.astro";
+import Pagination from "@src/components/Pagination.astro";
+
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import HeadingSection from "@src/components/HeadingSection.astro";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  // Get all equipment
+  const allEquipment = await getCollection("equipment");
+
+  // Sort equipment by order and filter drafts
+  const equipment = allEquipment
+    .filter((item) => !item.data.draft)
+    .sort((a, b) => {
+      if (a.data.order !== b.data.order) {
+        return a.data.order - b.data.order;
+      }
+      return a.data.title.localeCompare(b.data.title);
+    });
+
+  // Pagination settings
+  const maxPerPage = 9;
+
+  // Generate paginated paths
+  return paginate(equipment, { pageSize: maxPerPage });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<MainLayout title={`Equipment Fleet – Page ${page.currentPage} – Constructors`}>
+  <!-- Equipment Showcase -->
+  <section class="py-20 bg-bg-soft">
+    <HeadingSection label="Equipment Fleet" title="HEAVY MACHINERY" description="Explore Our Extensive Range of Construction Equipment" />
+    
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {page.data.map((item) => (
+          <EquipmentCard equipment={item} />
+        ))}
+      </div>
+
+      {page.lastPage > 1 && (
+        <div class="flex justify-center mt-16">
+          <Pagination 
+            currentPage={page.currentPage} 
+            totalPages={page.lastPage}
+            basePath="/equipment"
+          />
+        </div>
+      )}
+    </div>
+  </section>
+</MainLayout>

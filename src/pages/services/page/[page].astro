@@ -1,0 +1,61 @@
+---
+import MainLayout from "@src/layouts/MainLayout.astro";
+import ServiceCard from "@src/components/ServiceCard.astro";
+import Pagination from "@src/components/Pagination.astro";
+
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import HeadingPage from "@src/components/HeadingPage.astro";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  // Get all services
+  const allServices = await getCollection("service");
+
+  // Sort services by order and filter drafts
+  const services = allServices
+    .filter((service) => !service.data.draft)
+    .sort((a, b) => {
+      if (a.data.order !== b.data.order) {
+        return a.data.order - b.data.order;
+      }
+      return a.data.title.localeCompare(b.data.title);
+    });
+
+  // Pagination settings
+  const maxPerPage = 15;
+
+  // Generate paginated paths
+  return paginate(services, { pageSize: maxPerPage });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<MainLayout title={`Services – Page ${page.currentPage} – Constructors`}>
+  <HeadingPage
+    title="Our Services"
+    description="Discover the range of services we provide to support your construction and infrastructure projects."
+    image="/img/hero3.jpg"
+    imageAlt="Our Services" />
+    
+  <!-- Services Section -->
+  <section class="py-20 bg-bg-soft">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {page.data.map((service) => (
+          <ServiceCard service={service} />
+        ))}
+      </div>
+
+      {page.lastPage > 1 && (
+        <div class="flex justify-center mt-16">
+          <Pagination 
+            currentPage={page.currentPage} 
+            totalPages={page.lastPage}
+            basePath="/service"
+          />
+        </div>
+      )}
+    </div>
+  </section>
+</MainLayout>

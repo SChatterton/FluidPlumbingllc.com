@@ -1,0 +1,171 @@
+---
+import Button from './Button.astro'
+import HeroBg from '@src/assets/hero-bg.webp'
+
+export interface HeroButton {
+	label: string
+	href: string
+	icon?: string
+	class?: string
+	variant?: 'primary' | 'light'
+	size?: 'sm' | 'md' | 'lg'
+}
+
+export interface Props {
+	id?: string
+	bgimg?: string
+	slides?: string[]
+	title?: string
+	highlight?: string
+	subtitle?: string
+	primaryButton?: HeroButton
+	secondaryButton?: HeroButton
+}
+
+const {
+	id = 'home',
+	bgimg = HeroBg.src,
+	// slides = ['/img/hero1.jpg', '/img/hero2.jpg', '/img/hero3.jpg'],
+	title = 'Plumbing problems',
+	highlight = 'fixed fast',
+	subtitle = 'Need a plumber you can actually trust? At Fluid Plumbing, we fix it right the first time with honest pricing, fast turnaround, and clean job sites. Specializing in drain cleaning and water heater installs, we serve Kettering and nearby neighborhoods with no-BS service that puts homeowners first.',
+	primaryButton = {
+		label: 'Call: (937) 369-0346',
+		href: 'tel:9373690346',
+		icon: 'bi:telephone-fill',
+		variant: 'primary',
+		size: 'md',
+		class: 'text-white'
+	},
+	secondaryButton = {
+		label: 'Schedule Service',
+		href: 'https://www.youtube.com/watch?v=4BzjUq921Y4',
+		icon: 'bi:wrench',
+		variant: 'light',
+		size: 'md',
+		class: 'glightbox text-primary'
+	}
+} = Astro.props
+---
+
+<!-- <section
+	id={id}
+	class="relative overflow-hidden py-6"
+	x-data=`{
+		active: 0,
+		interval: null,
+
+		init() {
+			this.start();
+		},
+
+		start() {
+			this.interval = setInterval(() => {
+				this.next();
+			}, 8000);
+		},
+
+		next() {
+			this.active = (this.active + 1) % ${slides.length};
+		},
+
+		goTo(i) {
+			this.active = i;
+			clearInterval(this.interval);
+			this.start();
+		}
+	}`
+> -->
+
+<section
+	id={id}
+	class="relative overflow-hidden py-6"
+>
+	<img src={bgimg} alt="hero background" class="absolute inset-0 w-full h-full object-cover" />
+
+	{/*<!-- SLIDES -->
+	{
+		slides.map((slide, index) => (
+			<img
+				src={slide}
+				alt={`hero slide ${index + 1}`}
+				class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+				x-show={`active === ${index}`}
+				x-transition:enter="transition ease-out duration-1000"
+				x-transition:enter-start="opacity-0"
+				x-transition:enter-end="opacity-100"
+				x-transition:leave="transition ease-in duration-1000"
+				x-transition:leave-start="opacity-100"
+				x-transition:leave-end="opacity-0"
+				style={index === 0 ? '' : 'display:none;'}
+			/>
+		))
+	}*/}
+
+	<!-- OVERLAY -->
+	<div class="absolute inset-0 bg-linear-to-r from-[#032533]/90 to-sky-950/50"></div>
+
+	<!-- CONTENT -->
+	<div class="relative py-16 lg:py-24">
+		<div class="max-w-7xl mx-auto px-4">
+			<div class="max-w-3xl">
+				<div class="h-1 pipe-divider w-40 mb-6"></div>
+
+				<h1 class="font-display text-6xl md:text-7xl lg:text-8xl text-white mb-4 leading-none">
+					{title}
+					<span class="text-primary-light">{highlight}</span>
+				</h1>
+
+				<p class="text-xl text-gray-200 mb-8 max-w-2xl">
+					{subtitle}
+				</p>
+
+				<!-- BUTTONS -->
+				<div class="flex flex-wrap gap-4">
+					{
+						primaryButton && (
+							<Button
+								href={primaryButton.href}
+								icon={primaryButton.icon}
+								variant={primaryButton.variant}
+								size={primaryButton.size}
+								class={primaryButton.class}
+							>
+								{primaryButton.label}
+							</Button>
+						)
+					}
+
+					{
+						secondaryButton && (
+							<Button
+								href={secondaryButton.href}
+								icon={secondaryButton.icon}
+								variant={secondaryButton.variant}
+								size={secondaryButton.size}
+								class={secondaryButton.class}
+							>
+								{secondaryButton.label}
+							</Button>
+						)
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{/* <!-- DOTS -->
+	<div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+		{
+			slides.map((_, index) => (
+				<button
+					type="button"
+					aria-label={`Go to slide ${index + 1}`}
+					class="w-4 h-4 rounded-full border border-white cursor-pointer transition-all"
+					x-bind:class={`active === ${index} ? 'bg-primary border-primary scale-110' : 'bg-white/30 hover:bg-white/50'`}
+					x-on:click={`goTo(${index})`}
+				/>
+			))
+		}
+	</div> */}
+</section>

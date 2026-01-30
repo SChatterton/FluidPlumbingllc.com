@@ -1,0 +1,139 @@
+---
+import MainLayout from "@src/layouts/MainLayout.astro";
+import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (async () => {
+  const projects = await getCollection("project");
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}) satisfies GetStaticPaths;
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+const data = project.data;
+
+// Check if status indicates completed/success
+const isCompleted = data.status.toLowerCase().includes("completed");
+---
+
+<MainLayout title={`${data.title} – Constructors Projects`}>
+  <!-- Project Hero -->
+  <section class="relative py-16 lg:py-20 overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src={data.cover} 
+        alt={data.title}
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-linear-to-r from-black/95 via-black/80 to-black/60"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 text-center text-white">
+      <span class="inline-block bg-primary text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg mb-6">
+        {data.label}
+      </span>
+      <h1 class="font-display text-4xl md:text-6xl font-bold leading-tight mb-6">
+        {data.title}
+      </h1>
+      <div class="inline-flex h-1 pipe-divider w-40 mx-auto mb-6"></div>
+      <p class="text-xl md:text-2xl text-gray-200 max-w-4xl mx-auto">
+        {data.description}
+      </p>
+    </div>
+  </section>
+
+  <!-- Project Details -->
+  <section class="py-16 bg-bg-soft">
+    <div class="max-w-7xl mx-auto px-4">
+      <!-- Image Gallery -->
+      <div 
+        class="mb-12" 
+        x-data={`{
+          mainImage: '${data.images[0]}',
+          thumbnails: ${JSON.stringify(data.images)},
+          changeImage(src) { this.mainImage = src; }
+        }`}
+      >
+        <!-- Big Image -->
+        <div class="rounded-2xl overflow-hidden aspect-video shadow-2xl mb-4 sm:mb-8">
+          <img 
+            x-bind:src="mainImage" 
+            alt="Project view"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <!-- Thumbnails -->
+        {data.images.length > 1 && (
+          <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+            {data.images.map((image) => (
+              <button 
+                x-on:click={`changeImage('${image}')`}
+                class="group aspect-4/3 relative overflow-hidden rounded-xl shadow-lg shrink-0"
+              >
+                <img 
+                  src={image}
+                  alt="Gallery thumbnail"
+                  class="size-20 md:size-40 object-cover group-hover:scale-110 transition duration-500"
+                />
+                <div class="absolute inset-0 bg-black/40 group-hover:bg-primary/60 transition"></div>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <!-- Content Grid -->
+      <div class="grid lg:grid-cols-3 gap-12">
+        <!-- Left Column - Overview -->
+        <div class="lg:col-span-2">
+          <h2 class="font-display text-3xl md:text-4xl text-dark mb-6">
+            Project Overview
+          </h2>
+          <div class="post-content">
+            <Content />
+          </div>
+        </div>
+
+        <!-- Right Column - Project Info -->
+        <div>
+          <div class="bg-white rounded-2xl shadow-2xl p-8 sticky top-24">
+            <h3 class="font-display text-3xl text-dark mb-8">
+              Project Information
+            </h3>
+            <div class="space-y-6 text-lg">
+              {data.information.map((info) => (
+                <div>
+                  <span class="font-semibold text-dark block mb-1">
+                    {info.label}
+                  </span>
+                  <p class={`${
+                    info.label === "Project Status" 
+                      ? isCompleted 
+                        ? "text-primary font-bold" 
+                        : "text-amber-600 font-bold"
+                      : "text-steel-gray"
+                  }`}>
+                    {info.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <a 
+              href={data.cta.link}
+              class="mt-10 w-full bg-primary hover:bg-amber-600 text-white font-bold py-4 rounded-lg flex items-center justify-center gap-3 transition"
+            >
+              <Icon name="bi:send" class="text-xl" />
+              {data.cta.text}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>

@@ -1,0 +1,67 @@
+---
+import ProgressBar from "./ProgressBar.astro";
+
+export interface ProgressItem {
+  label: string;
+  value: number;
+}
+
+export interface Props {
+  image?: string;
+  imageAlt?: string;
+  title?: string;
+  paragraphs?: string[];
+  progress?: ProgressItem[];
+}
+
+const {
+  image = "/img/about.jpg",
+  imageAlt = "Constructors Team & Fleet",
+
+  title = "About Megarent Constructors",
+
+  paragraphs = [
+    "Founded in 1998, Megarent Constructors has grown to become one of the most trusted construction and heavy equipment partners in the United States.",
+    "With a proven track record across infrastructure, industrial, and commercial sectors, we deliver reliability through modern fleets, skilled operators, and strict safety standards.",
+  ],
+
+  progress = [
+    { label: "Project Delivery Efficiency", value: 92 },
+    { label: "Equipment Fleet Availability", value: 88 },
+    { label: "Safety Compliance Rate", value: 97 },
+    { label: "Client Satisfaction Score", value: 94 },
+  ],
+} = Astro.props;
+---
+
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- IMAGE -->
+      <div>
+        <img
+          src={image}
+          alt={imageAlt}
+          class="rounded-2xl shadow-2xl"
+        />
+      </div>
+
+      <!-- CONTENT -->
+      <div>
+        <h1 class="font-display text-4xl md:text-5xl text-dark mb-6">
+          {title}
+        </h1>
+        {paragraphs.map((p) => (
+          <p class="text-lg text-steel-gray mb-6">{p}</p>
+        ))}
+
+        <!-- PROGRESS GRID -->
+        <div class="grid grid-cols-1 gap-4">
+          {progress.map((item) => (
+            <ProgressBar label={item.label} value={item.value} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

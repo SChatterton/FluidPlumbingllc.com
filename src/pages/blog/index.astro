@@ -1,0 +1,51 @@
+---
+import MainLayout from "@src/layouts/MainLayout.astro";
+import BlogCard from "@src/components/BlogCard.astro";
+import Pagination from "@src/components/Pagination.astro";
+import HeadingPage from "@src/components/HeadingPage.astro";
+
+import { getCollection } from "astro:content";
+
+// Mendapatkan semua posts (support .md dan .mdx)
+const allPosts = await getCollection("blog");
+
+// Sort posts by date (newest first)
+const posts = allPosts.sort((a, b) => {
+  const dateA = typeof a.data.date === "string" ? new Date(a.data.date) : a.data.date;
+  const dateB = typeof b.data.date === "string" ? new Date(b.data.date) : b.data.date;
+  return dateB.valueOf() - dateA.valueOf();
+});
+
+// Pagination settings
+const maxPerPage = 6;
+const currentPage = 1;
+
+// Calculate total pages
+const totalPages = Math.ceil(posts.length / maxPerPage);
+
+// Get visible posts for current page
+const visiblePosts = posts.slice(0, maxPerPage);
+---
+
+<MainLayout title="Blog – Constructors">
+  <HeadingPage
+    title="Insights & Updates"
+    description="Stay ahead with expert insights on heavy equipment, construction best practices, safety standards, and California infrastructure developments."
+    image="/img/hero3.jpg"
+    imageAlt="Our Blogs"
+  />
+
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {visiblePosts.map((post) => <BlogCard post={post} />)}
+      </div>
+
+      {totalPages > 1 && (
+        <div class="flex justify-center mt-16">
+          <Pagination currentPage={currentPage} totalPages={totalPages} />
+        </div>
+      )}
+    </div>
+  </section>
+</MainLayout>

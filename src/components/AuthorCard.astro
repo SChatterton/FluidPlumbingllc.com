@@ -1,0 +1,36 @@
+---
+import { Icon } from "astro-icon/components";
+export interface Props {
+  author: any;
+}
+const { author } = Astro.props;
+---
+
+<div class="bg-bg-soft rounded-2xl shadow-lg p-8 md:p-12 flex flex-col md:flex-row max-md:items-center gap-8">
+  <img src={author.avatar} alt={author.name}
+       class="flex-none w-24 h-24 rounded-full object-cover border-4 border-primary" />
+
+  <div class="text-center md:text-left">
+    <h3 class="text-2xl font-bold text-dark mb-1">{author.name}</h3>
+    <p class="text-primary font-semibold mb-2">{author.job}</p>
+    <p class="text-steel-gray mb-6">{author.description}</p>
+
+    <div class="flex gap-4 justify-center md:justify-start">
+      {author.socials.linkedin && (
+        <a href={author.socials.linkedin} class="text-primary hover:text-dark">
+          <Icon name="bi:linkedin" class="text-2xl" />
+        </a>
+      )}
+      {author.socials.twitter && (
+        <a href={author.socials.twitter} class="text-primary hover:text-dark">
+          <Icon name="bi:twitter-x" class="text-2xl" />
+        </a>
+      )}
+      {author.socials.email && (
+        <a href={`mailto:${author.socials.email}`} class="text-primary hover:text-dark">
+          <Icon name="bi:envelope" class="text-2xl" />
+        </a>
+      )}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content'
+import HeadingSection from '@src/components/HeadingSection.astro'
+import ServiceCard from '@src/components/ServiceCard.astro'
+import Pagination from '@src/components/Pagination.astro'
+
+// Get all services
+const allServices = await getCollection('service')
+
+// Sort services by order and filter drafts
+const services = allServices
+	.filter((service) => !service.data.draft)
+	.sort((a, b) => {
+		// Sort by order first, then by title
+		if (a.data.order !== b.data.order) {
+			return a.data.order - b.data.order
+		}
+		return a.data.title.localeCompare(b.data.title)
+	})
+
+// Pagination settings
+const maxPerPage = 15
+const currentPage = 1
+
+// Calculate total pages
+const totalPages = Math.ceil(services.length / maxPerPage)
+
+// Get visible services for current page
+const visibleServices = services.slice(0, maxPerPage)
+---
+
+<section class="py-20 bg-bg-soft">
+	<div class="max-w-7xl mx-auto px-4">
+		<HeadingSection
+			label="Services"
+			title="What We Offers"
+			description="Explore the range of services we provide to support your construction and infrastructure projects."
+		/>
+		<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+			{visibleServices.map((service) => <ServiceCard service={service} />)}
+		</div>
+
+		{
+			totalPages > 1 && (
+				<div class="flex justify-center mt-16">
+					<Pagination currentPage={currentPage} totalPages={totalPages} basePath="/service" />
+				</div>
+			)
+		}
+	</div>
+</section>

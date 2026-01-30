@@ -1,0 +1,25 @@
+---
+import MainLayout from "@src/layouts/MainLayout.astro";
+import HeadingPage from "@src/components/HeadingPage.astro";
+import AboutTwoSection from "@src/components/AboutTwoSection.astro";
+import CtaSection from "@src/components/CtaSection.astro";
+import TestimonialSection from "@src/components/TestimonialSection.astro";
+import ProjectSection from "@src/components/ProjectSection.astro";
+
+---
+
+<MainLayout title="Our Projects – Constructors">
+  <HeadingPage
+    title="Projects Built With Precision"
+    description="We've worked on a wide variety of projects with meticulous care and precision, resulting in masterpieces to our clients' satisfaction."
+    image="/img/hero2.jpg"
+    imageAlt="Our Projects"
+   />
+  <AboutTwoSection />
+  <ProjectSection />
+  <CtaSection
+    title="READY TO START YOUR PROJECT?"
+    description="Get a free consultation and quote for your construction needs. Our team is ready to help you succeed."
+  />
+  <TestimonialSection />
+</MainLayout>

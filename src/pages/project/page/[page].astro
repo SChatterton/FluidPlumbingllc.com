@@ -1,0 +1,61 @@
+---
+import MainLayout from "@src/layouts/MainLayout.astro";
+import ProjectCard from "@src/components/ProjectCard.astro";
+import Pagination from "@src/components/Pagination.astro";
+
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import HeadingPage from "@src/components/HeadingPage.astro";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  // Get all projects
+  const allProjects = await getCollection("project");
+
+  // Sort projects by order and filter drafts
+  const projects = allProjects
+    .filter((project) => !project.data.draft)
+    .sort((a, b) => {
+      if (a.data.order !== b.data.order) {
+        return a.data.order - b.data.order;
+      }
+      return a.data.title.localeCompare(b.data.title);
+    });
+
+  // Pagination settings
+  const maxPerPage = 9;
+
+  // Generate paginated paths
+  return paginate(projects, { pageSize: maxPerPage });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<MainLayout title={`Projects – Page ${page.currentPage} – Constructors`}>
+  <HeadingPage
+    title="Our Projects"
+    description="Discover Our Portfolio of Successful Construction Projects"
+    image="/img/hero2.jpg"
+    imageAlt="Our Projects" />
+
+  <!-- Projects Section -->
+  <section class="py-20 bg-bg-soft">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {page.data.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+
+      {page.lastPage > 1 && (
+        <div class="flex justify-center mt-16">
+          <Pagination 
+            currentPage={page.currentPage} 
+            totalPages={page.lastPage}
+            basePath="/project"
+          />
+        </div>
+      )}
+    </div>
+  </section>
+</MainLayout>

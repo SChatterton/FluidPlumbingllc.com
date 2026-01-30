@@ -1,0 +1,100 @@
+---
+import HeadingSection from "./HeadingSection.astro";
+
+export interface StoryItem {
+  year: string | number;
+  title: string;
+  description: string;
+}
+
+export interface Props {
+  label?: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  timeline?: StoryItem[];
+}
+
+const {
+  label,
+  title,
+  description,
+
+  image = "/img/hero1.jpg",
+  imageAlt = "Company Journey",
+
+  timeline = [
+    {
+      year: "2025",
+      title: "Today",
+      description:
+        "Over 250 late-model heavy equipment units, 12 facilities across California, 400+ certified operators, and more than 1,500 successful projects delivered.",
+    },
+    {
+      year: "2015",
+      title: "Statewide Recognition",
+      description:
+        "Awarded key contracts for California High-Speed Rail and major renewable energy developments. Achieved 150+ units and 8 locations statewide.",
+    },
+    {
+      year: "2006",
+      title: "First Major Expansion",
+      description:
+        "Opened additional yards in Sacramento and San Diego. Fleet grew to over 80 modern units serving infrastructure and energy projects.",
+    },
+    {
+      year: "1998",
+      title: "The Beginning",
+      description:
+        "Founded in Los Angeles with just 8 used excavators and a small team of dedicated operators.",
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- HEADING -->
+    <HeadingSection
+      label={label}
+      title={title}
+      description={description}
+      align="center"
+    />
+
+    <!-- TIMELINE GRID -->
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- TIMELINE COLUMN -->
+      <div class="order-2 lg:order-1">
+        <div class="space-y-10">
+          {timeline.map((item) => (
+            <div class="flex gap-6">
+              <div class="shrink-0 w-20 h-20 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                {item.year}
+              </div>
+
+              <div class="relative">
+                <h3 class="text-xl md:text-2xl font-bold text-dark mb-2">
+                  {item.title}
+                </h3>
+                <p class="text-steel-gray">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- IMAGE COLUMN -->
+      <div class="order-1 lg:order-2">
+        <img
+          src={image}
+          alt={imageAlt}
+          class="rounded-2xl shadow-2xl w-full object-cover"
+        />
+      </div>
+    </div>
+  </div>
+</section>

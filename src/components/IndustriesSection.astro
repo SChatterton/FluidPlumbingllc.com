@@ -1,0 +1,72 @@
+---
+import { Icon } from "astro-icon/components";
+import HeadingSection from "./HeadingSection.astro";
+
+export interface IndustryItem {
+  icon: string;        // contoh: "bi:building"
+  title: string;       // contoh: "Infrastructure & Civil"
+  description: string; // contoh: "Toll roads, bridges, airports..."
+}
+
+export interface Props {
+  label?: string;
+  title?: string;
+  description?: string;
+  items?: IndustryItem[];
+}
+
+const {
+  label,
+  title,
+  description,
+
+  items = [
+    {
+      icon: "bi:building",
+      title: "Infrastructure & Civil",
+      description: "Toll roads, bridges, airports, ports, railways",
+    },
+    {
+      icon: "bi:minecart-loaded",
+      title: "Mining & Quarry",
+      description: "Coal, nickel, gold, bauxite, aggregates",
+    },
+    {
+      icon: "bi:fuel-pump",
+      title: "Oil, Gas & Energy",
+      description: "Refineries, power plants, pipelines, offshore",
+    },
+    {
+      icon: "bi:houses",
+      title: "Commercial & Residential",
+      description: "High-rise buildings, industrial estates, housing",
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="py-20 bg-bg-soft">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- HEADING -->
+    <HeadingSection
+      label={label}
+      title={title}
+      description={description}
+      align="center"
+    />
+
+    <!-- GRID -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {items.map((item) => (
+        <div class="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-2xl transition">
+          <div class="w-20 h-20 mx-auto mb-6 bg-primary-soft rounded-full flex items-center justify-center">
+            <Icon name={item.icon} class="text-4xl text-primary" />
+          </div>
+
+          <h3 class="text-xl md:text-2xl font-bold mb-3">{item.title}</h3>
+          <p class="text-steel-gray">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

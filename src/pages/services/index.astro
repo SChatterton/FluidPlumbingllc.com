@@ -1,0 +1,23 @@
+---
+import MainLayout from "@src/layouts/MainLayout.astro";
+import HeadingPage from "@src/components/HeadingPage.astro";
+import SolutionSection from "@src/components/SolutionSection.astro";
+import HowWeWorkSection from "@src/components/HowWeWorkSection.astro";
+import FaqSection from "@src/components/FaqSection.astro";
+import ServiceSection from "@src/components/ServiceSection.astro";
+---
+<MainLayout title="Our Services – Constructors">
+  <HeadingPage
+    title="Construction Solutions"
+    description="From equipment rental with certified operators to full-site development and maintenance — we deliver end-to-end solutions trusted by United States largest infrastructure."
+    image="/img/hero3.jpg"
+    imageAlt="Our Services"
+   />
+  <SolutionSection />
+  <ServiceSection />
+  <HowWeWorkSection />
+  <FaqSection
+    label="Customer Support"
+    title="COMMON QUESTIONS ANSWERED"
+    />
+</MainLayout>

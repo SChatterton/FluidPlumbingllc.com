@@ -1,0 +1,89 @@
+---
+import TopBar from "./TopBar.astro";
+import Logo from "./Logo.astro";
+import Button from "./Button.astro";
+import { Icon } from "astro-icon/components";
+
+const navItems = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/services" },
+  { name: "Areas We Serve", href: "/areas-we-serve" },
+  { name: "FAQs", href: "/faqs" },
+  { name: "Gallery", href: "/gallery" },
+  // { name: "Projects", href: "/project" },
+  // { name: "Blogs", href: "/blog" },
+];
+---
+
+<TopBar />
+
+<header class="bg-white shadow-md sticky top-0 z-50" x-data="{ open: false }">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- TOP ROW -->
+    <div class="flex justify-between items-center py-4">
+      <!-- LOGO -->
+      <div class="flex items-center gap-3 h-auto">
+        <Logo />
+      </div>
+
+      <!-- DESKTOP NAV -->
+      <nav class="hidden lg:flex items-center gap-8">
+        {navItems.map((item) => (
+          <a href={item.href} class="text-dark hover:text-primary font-medium transition">
+            {item.name}
+          </a>
+        ))}
+
+        <!-- BUTTON -->
+        <Button
+          href="tel:9373690346"
+          variant="primary"
+          size="sm"
+          icon="bi:telephone-fill"
+        >
+          Call Now
+        </Button>
+      </nav>
+
+      <!-- MOBILE TOGGLE -->
+      <button 
+        x-on:click="open = !open" 
+        class="lg:hidden text-dark text-3xl"
+        aria-label="Toggle Mobile Menu"
+      >
+        <span x-show="!open">
+          <Icon name="bi:list" />
+        </span>
+
+        <span x-show="open" style="display: none;">
+          <Icon name="bi:x-lg" />
+        </span>
+      </button>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <nav
+      x-show="open"
+      x-transition
+      style="display: none;"
+      class="lg:hidden pb-4 flex flex-col gap-1"
+    >
+      {navItems.map((item) => (
+        <a href={item.href} class="block py-2 text-dark hover:text-primary transition">
+          {item.name}
+        </a>
+      ))}
+
+      <Button
+        href="tel:9373690346"
+        variant="primary"
+        size="sm"
+        icon="bi:telephone-fill"
+        class="w-full mt-2"
+      >
+        Call Now
+      </Button>
+    </nav>
+  </div>
+</header>

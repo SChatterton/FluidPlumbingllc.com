@@ -1,0 +1,37 @@
+---
+export interface Brand {
+  image: string;
+  alt: string;
+}
+
+export interface Props {
+  brands?: Brand[];
+}
+
+const {
+  brands = [
+    { image: '/img/brand1.png', alt: 'Brand 1' },
+    { image: '/img/brand2.png', alt: 'Brand 2' },
+    { image: '/img/brand3.png', alt: 'Brand 3' },
+    { image: '/img/brand4.png', alt: 'Brand 4' },
+    { image: '/img/brand5.png', alt: 'Brand 5' },
+    { image: '/img/brand6.png', alt: 'Brand 6' },
+    { image: '/img/brand7.png', alt: 'Brand 7' },
+    { image: '/img/brand8.png', alt: 'Brand 8' },
+  ]
+} = Astro.props;
+---
+<div class="relative">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+    {brands.map((brand) => (
+        <div class="flex items-center justify-center">
+        <img
+            src={brand.image}
+            alt={brand.alt}
+            class="max-w-full h-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
+            loading="lazy"
+        />
+        </div>
+    ))}
+    </div>
+</div>

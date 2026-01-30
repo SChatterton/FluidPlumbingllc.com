@@ -1,0 +1,60 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  project: CollectionEntry<"project">;
+}
+
+const { project } = Astro.props;
+const { data, slug } = project;
+
+// Extract key info from information array
+const getInfo = (label: string) => {
+  return data.information.find(info => info.label === label)?.description || "-";
+};
+---
+
+<div class="relative bg-white rounded-2xl shadow-xl overflow-hidden group transition">
+  <div class="h-60 overflow-hidden">
+    <a href={`/project/${slug}`}>
+      <img 
+        src={data.cover}
+        alt={data.title}
+        class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+        loading="lazy"
+      />
+    </a>
+  </div>
+
+  <!-- Ribbon -->
+  <div class="absolute top-4 left-4 bg-primary text-white px-4 py-1 rounded-full text-sm font-semibold shadow-lg">
+    {data.label}
+  </div>
+
+  <!-- Content -->
+  <div class="p-6 space-y-4">
+    <h3 class="text-2xl font-bold text-dark hover:text-primary transition">
+      <a href={`/project/${slug}`}>
+        {data.title}
+      </a>
+    </h3>
+
+    <p class="text-steel-gray leading-relaxed">
+      {data.description}
+    </p>
+
+    <!-- Info -->
+    <div class="grid grid-cols-1 text-sm space-y-2">
+      {data.information.slice(0, 4).map((info) => (
+        <div class="flex items-start gap-3 py-1">
+          <span class="font-semibold text-dark min-w-[100px]">
+            {info.label}:
+          </span>
+          <p class="text-steel-gray">
+            {info.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

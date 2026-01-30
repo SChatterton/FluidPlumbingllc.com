@@ -1,0 +1,99 @@
+---
+export interface StatItem {
+  value: string;   // exp: "150+" atau "Expert"
+  label: string;   // exp: "Equipment Types"
+}
+
+export interface Props {
+  label?: string;
+  title?: string;
+
+  intro1?: string;
+  intro2?: string;
+
+  stats?: StatItem[];
+
+  image?: string;
+  imageAlt?: string;
+}
+
+const {
+  label = "NEED EQUIPMENT?",
+  title = "THE RIGHT MACHINES FOR YOUR PROJECT",
+
+  intro1 = `
+    Searching for reliable heavy equipment for your upcoming project?
+    Many contractors struggle to find the right machines, with availability,
+    specification mismatches, or unclear rental options slowing down progress.
+  `,
+
+  intro2 = `
+    At Megarent Constructors, we offer a complete range of excavators, bulldozers,
+    loaders, cranes, dump trucks, and more. Our team is ready to help you choose
+    the best equipment based on your project scale, terrain, and timeline.
+    Contact us anytime for a free consultation and expert guidance.
+  `,
+
+  stats = [
+    { value: "150+", label: "Equipment Types" },
+    { value: "Expert", label: "Consultation Support" },
+    { value: "24/7", label: "Customer Assistance" },
+  ],
+
+  image = "/img/client.jpg",
+  imageAlt = "Equipment Consultation",
+} = Astro.props;
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- LEFT CONTENT -->
+      <div>
+        <!-- LABEL -->
+        {label && (
+          <div class="inline-block px-4 py-2 bg-primary-soft text-primary-dark rounded-full font-semibold mb-6">
+            {label}
+          </div>
+        )}
+        <!-- TITLE -->
+        {title && (
+          <h1 class="font-display text-4xl md:text-5xl text-dark mb-6">
+            {title}
+          </h1>
+        )}
+        <!-- INTRO PARAGRAPH 1 -->
+        {intro1 && (
+          <p class="text-lg text-steel-gray mb-6">
+            {intro1}
+          </p>
+        )}
+        <!-- INTRO PARAGRAPH 2 -->
+        {intro2 && (
+          <p class="text-lg text-steel-gray mb-8">
+            {intro2}
+          </p>
+        )}
+
+        <!-- STATS GRID -->
+        <div class="grid grid-cols-3 gap-8">
+          {stats.map((item) => (
+            <div>
+              <div class="text-4xl font-display text-primary font-bold">{item.value}</div>
+              <p class="text-steel-gray">{item.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- RIGHT IMAGE -->
+      <div>
+        <img
+          src={image}
+          alt={imageAlt}
+          class="rounded-2xl shadow-2xl"
+        />
+      </div>
+    </div>
+  </div>
+</section>

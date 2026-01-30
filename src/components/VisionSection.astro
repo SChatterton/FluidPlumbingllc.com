@@ -1,0 +1,68 @@
+---
+import HeadingSection from "./HeadingSection.astro";
+import { Icon } from "astro-icon/components";
+
+export interface VisionItem {
+  icon: string;        // contoh: "bi:eye"
+  title: string;       // contoh: "Our Vision"
+  description: string; // contoh: "To be California’s most trusted..."
+}
+
+export interface Props {
+  label?: string;
+  title?: string;
+  items?: VisionItem[];
+}
+
+const {
+  label,
+  title,
+
+  items = [
+    {
+      icon: "bi:eye",
+      title: "Our Vision",
+      description:
+        "To be California’s most trusted and innovative heavy equipment and construction solutions partner by 2030.",
+    },
+    {
+      icon: "bi:flag",
+      title: "Our Mission",
+      description:
+        "Deliver safe, reliable, and cutting-edge heavy equipment services that empower California’s infrastructure, energy, and development projects.",
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="py-20 bg-bg-soft">
+  <div class="max-w-7xl mx-auto px-4">
+
+    <!-- HEADING -->
+    <HeadingSection
+      label={label}
+      title={title}
+      align="center"
+    />
+
+    <!-- GRID -->
+    <div class="grid md:grid-cols-2 gap-8">
+      {items.map((item) => (
+        <div class="bg-white p-10 rounded-2xl shadow-xl text-center hover:shadow-2xl transition group">
+          <div class="w-24 h-24 bg-primary rounded-full mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition">
+            <Icon name={item.icon} class="text-5xl text-white" />
+          </div>
+
+          <h3 class="text-xl md:text-2xl font-bold text-dark mb-4">
+            {item.title}
+          </h3>
+
+          <p class="text-steel-gray text-base md:text-lg">
+            {item.description}
+          </p>
+
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

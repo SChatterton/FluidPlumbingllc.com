@@ -1,0 +1,31 @@
+---
+import HeadingPage from '@src/components/HeadingPage.astro';
+import MainLayout from '@src/layouts/MainLayout.astro';
+
+import { getEntry } from "astro:content";
+
+const entry = await getEntry("pages", "privacy");
+let Content;
+if (entry) {
+  ({ Content } = await entry.render());
+}
+---
+
+{entry ? (
+  <MainLayout title={entry.data.title}>
+    <HeadingPage
+        title="Privacy Policy"
+        image="/img/hero3.jpg"
+        imageAlt="get quote"
+    />
+    <div class="relative">
+      <div class="max-w-5xl mx-auto px-4 py-16">
+        <div class="post-content">
+          {Content && <Content />}
+        </div>
+      </div>
+    </div>
+  </MainLayout>
+) : (
+  <div>Page not found.</div>
+)}

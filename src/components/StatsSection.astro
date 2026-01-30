@@ -1,0 +1,48 @@
+---
+export interface StatItem {
+  number: number;        // ex: 250
+  suffix?: string;       // ex: "+", "%", " units"
+  label: string;         // ex: "Heavy Equipment"
+  class?: string;        // optional extra class
+}
+
+export interface Props {
+  stats?: StatItem[];
+  bgClass?: string;
+}
+
+const {
+  stats = [
+    { number: 250, suffix: "+", label: "Heavy Equipment" },
+    { number: 1500, suffix: "+", label: "Projects Completed" },
+    { number: 25, suffix: "+", label: "Years Experience" },
+    { number: 98, suffix: "%", label: "Client Satisfaction" },
+  ],
+  bgClass = "bg-dark-deep",
+} = Astro.props;
+---
+
+<section class={`${bgClass} relative`}>
+  <div class="max-w-7xl mx-auto relative px-4 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      {stats.map((s) => (
+        <div class={`text-center ${s.class ?? ""}`}>
+          
+          <!-- Animated Number -->
+          <div
+            class="stat-number font-display text-primary mb-2"
+            data-animate
+            data-counter={s.number}
+            data-duration="2000"
+            data-prefix=""
+            data-suffix={s.suffix ?? ""}
+          >
+            0
+          </div>
+
+          <p class="text-metal-gray font-medium">{s.label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

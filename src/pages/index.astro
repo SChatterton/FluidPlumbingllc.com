@@ -1,0 +1,33 @@
+---
+import MainLayout from '@src/layouts/MainLayout.astro'
+import HeroSection from '@src/components/HeroSection.astro'
+import StatsSection from '@src/components/StatsSection.astro'
+import AboutSection from '@src/components/AboutSection.astro'
+import CtaSection from '@src/components/CtaSection.astro'
+import IndustriesSection from '@src/components/IndustriesSection.astro'
+import WhySection from '@src/components/WhySection.astro'
+import TestimonialSection from '@src/components/TestimonialSection.astro'
+import EquipmentSection from '@src/components/EquipmentSection.astro'
+import ServiceSection from '@src/components/ServiceSection.astro'
+import ProjectSection from '@src/components/ProjectSection.astro'
+---
+
+<MainLayout title="Fluid Plumbing | Residential Plumber in Dayton & Kettering">
+	<HeroSection />
+	<StatsSection />
+	<AboutSection />
+	<ServiceSection />
+	<EquipmentSection />
+	<WhySection label="WHY Constructors" title="YOUR SUCCESS IS OUR PRIORITY" />
+	<ProjectSection />
+	<IndustriesSection
+		label="INDUSTRIES WE SERVE"
+		title="POWERING EVERY SECTOR"
+		description="For more than 25 years we have supported the biggest projects in United States & Canada"
+	/>
+	<CtaSection
+		title="READY TO START YOUR PROJECT?"
+		description="Get a free consultation and quote for your construction needs. Our team is ready to help you succeed."
+	/>
+	<TestimonialSection />
+</MainLayout>

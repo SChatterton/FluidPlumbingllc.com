@@ -1,37 +1,37 @@
 ---
 import MainLayout from "@src/layouts/MainLayout.astro";
-import EquipmentCard from "@src/components/EquipmentCard.astro";
+import AreasWeServeCard from "@src/components/AreasWeServeCard.astro";
 import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 import type { GetStaticPaths } from "astro";
 
 export const getStaticPaths = (async () => {
-  const equipment = await getCollection("equipment");
-  return equipment.map((item) => ({
+  const areas = await getCollection("serviceAreas");
+  return areas.map((item) => ({
     params: { slug: item.slug },
-    props: { equipment: item },
+    props: { area: item },
   }));
 }) satisfies GetStaticPaths;
 
-const { equipment } = Astro.props;
-const { Content } = await equipment.render();
-const data = equipment.data;
+const { area } = Astro.props;
+const { Content } = await area.render();
+const data = area.data;
 
 // Get related equipment
-const allEquipment = await getCollection("equipment");
+const allEquipment = await getCollection("serviceAreas");
 const related = allEquipment
   .filter((item) => 
-    item.data.category === data.category && 
-    item.slug !== equipment.slug &&
+    // item.data.category === data.category && 
+    item.slug !== area.slug &&
     !item.data.draft
   )
   .slice(0, 4);
 
 // Images for gallery
-const galleryImages = data.images || [data.cover];
+// const galleryImages = data.images || [data.cover];
 ---
 
-<MainLayout title={`${data.model} ${data.title} – Constructors Equipment`}>
+<MainLayout title={data.title}>
   <!-- Hero Section -->
   <section class="relative py-16 lg:py-20 overflow-hidden bg-dark">
     <div class="absolute inset-0 opacity-20">
@@ -43,11 +43,11 @@ const galleryImages = data.images || [data.cover];
     </div>
     <div class="max-w-7xl mx-auto px-4 relative z-10">
       <div class="text-center text-white">
-        <span class="inline-block bg-primary text-white px-6 py-2 rounded-full font-bold mb-6">
+        <!-- <span class="inline-block bg-primary text-white px-6 py-2 rounded-full font-bold mb-6">
           {data.label}
-        </span>
-        <h1 class="font-display text-4xl md:text-5xl font-bold mb-6">
-          {data.model} {data.title}
+        </span> -->
+        <h1 class="font-display text-4xl md:text-5xl mb-6">
+          Plumbing services in {data.title}
         </h1>
         <div class="inline-flex h-1 pipe-divider w-40 mx-auto"></div>
       </div>
@@ -56,7 +56,7 @@ const galleryImages = data.images || [data.cover];
 
   <!-- Content -->
   <section class="py-16 lg:py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
+    {/*<div class="max-w-7xl mx-auto px-4">
       <div class="grid lg:grid-cols-2 lg:gap-12">
         
         <!-- Left: Image Gallery -->
@@ -154,7 +154,7 @@ const galleryImages = data.images || [data.cover];
               {data.cta.text}
             </a>
             <a 
-              href="tel:+1234567890"
+              href="tel:9373690346"
               class="border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold py-4 px-8 rounded-lg text-center transition flex items-center justify-center gap-3"
             >
               <Icon name="bi:telephone-fill" class="text-xl" />
@@ -163,12 +163,12 @@ const galleryImages = data.images || [data.cover];
           </div>
         </div>
       </div>
-    </div>
+    </div> */}
 
     <!-- Description -->
-    <div class="max-w-7xl mx-auto px-4 mt-16">
+    <div class="max-w-7xl mx-auto px-4">
       <div class="bg-white">
-        <h3 class="font-display text-3xl md:text-4xl text-dark mb-6">Description</h3>
+        <!-- <h3 class="font-display text-3xl md:text-4xl text-dark mb-6">Description</h3> -->
         <div class="post-content">
           <Content />
         </div>
@@ -185,7 +185,7 @@ const galleryImages = data.images || [data.cover];
         </h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {related.map((item) => (
-            <EquipmentCard equipment={item} />
+            <AreasWeServeCard area={item} />
           ))}
         </div>
       </div>

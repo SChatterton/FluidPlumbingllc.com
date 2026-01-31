@@ -13,7 +13,7 @@ interface Props {
 }
 
 const {
-	title = 'Fluid Plumbing | Residential Plumber in Dayton & Kettering',
+	title,
 	description = 'Need a reliable plumber in Dayton or Kettering? Fluid Plumbing offers honest pricing, fast, clean service — $50 off first-time customers!'
 } = Astro.props
 ---
@@ -23,7 +23,7 @@ const {
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>{title}</title>
+		<title>{title ? `${title} | Fluid Plumbing` : 'Fluid Plumbing | Residential Plumber in Dayton & Kettering'}</title>
 
 		<!-- Primary Meta -->
 		<meta name="description" content={description} />
@@ -56,6 +56,20 @@ const {
 			}
 			window.Alpine = Alpine
 			Alpine.start()
+		</script>
+
+		<!-- Google tag (gtag.js) -->
+		<script is:inline src="https://www.googletagmanager.com/gtag/js?id=AW-16506311868" async></script>
+		<script>
+			// @ts-nocheck
+			window.dataLayer = window.dataLayer || []
+			
+			function gtag(...args) {
+				dataLayer.push(args)
+			}
+
+			gtag('js', new Date())
+			gtag('config', 'AW-16506311868')
 		</script>
 
 		<!-- GLightbox -->

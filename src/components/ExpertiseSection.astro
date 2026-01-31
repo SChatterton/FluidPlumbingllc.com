@@ -1,0 +1,64 @@
+---
+import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
+import EmergencyDrainCleaning from '@src/assets/Emergency-drain-cleaning-45429-1152x1536.jpg'
+
+export interface Props {
+	badgeText?: string
+	title?: string
+}
+
+const {
+	badgeText = 'Why locals trust Fluid Plumbing',
+	title = 'Expertise you can count on. Service you can trust.',
+} = Astro.props
+---
+
+<section class="py-20 bg-white">
+	<div class="max-w-7xl mx-auto px-4">
+		<div class="grid lg:grid-cols-2 gap-12 items-center">
+			<!-- IMAGE -->
+			<Image src={EmergencyDrainCleaning} alt="Emergency drain cleaning" class="aspect-16/10 lg:aspect-auto object-cover rounded-2xl shadow-2xl" />
+			<!-- CONTENT -->
+			<div>
+				<!-- BADGE -->
+				<div class="inline-block px-4 py-2 bg-primary-soft text-primary-dark rounded-full font-semibold mb-6">
+					{badgeText}
+				</div>
+
+				<!-- TITLE -->
+				<h2 class="font-display text-4xl md:text-5xl text-dark mb-6">
+					{title}
+				</h2>
+
+				<!-- PARAGRAPHS -->
+				<div class="post-content text-lg text-steel-gray space-y-4 mb-8">
+					<p>Homeowners in Kettering and Dayton call us because we keep it simple: honest pricing, fast service, and clean work - done right the first time.</p>
+					<p><strong>Here's what sets us apart:</strong></p>
+					<ul>
+						<li class="flex items-start gap-4">
+							<Icon name="bi:check-circle-fill" class="text-2xl text-primary mt-0.5 shrink-0" />
+							<p><strong>Real Local Experience:</strong> 7+ years serving homes in our area - we know the homes, pipes, and common issues inside and out.</p>
+						</li>
+						<li class="flex items-start gap-4">
+							<Icon name="bi:check-circle-fill" class="text-2xl text-primary mt-0.5 shrink-0" />
+							<p><strong>Fast Emergency Response:</strong> We treat urgent calls like they matter (because they do).</p>
+						</li>
+						<li class="flex items-start gap-4">
+							<Icon name="bi:check-circle-fill" class="text-2xl text-primary mt-0.5 shrink-0" />
+							<p><strong>Quality Over Corners:</strong> No shortcuts - just solid work backed by warranties.</p>
+						</li>
+						<li class="flex items-start gap-4">
+							<Icon name="bi:check-circle-fill" class="text-2xl text-primary mt-0.5 shrink-0" />
+							<p><strong>Clear Communication:</strong> Upfront quotes, no jargon, and zero surprise fees.</p>
+						</li>
+						<li class="flex items-start gap-4">
+							<Icon name="bi:check-circle-fill" class="text-2xl text-primary mt-0.5 shrink-0" />
+							<p><strong>Owner-Led Service:</strong> You'll work directly with the owner - not a random tech or subcontractor.</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

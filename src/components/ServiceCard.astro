@@ -1,35 +1,34 @@
 ---
-import { Icon } from "astro-icon/components";
-import type { CollectionEntry } from "astro:content";
+import { Icon } from 'astro-icon/components'
+import type { CollectionEntry } from 'astro:content'
 
 export interface Props {
-  service: CollectionEntry<"service">;
+	service: CollectionEntry<'service'>
 }
 
-const { service } = Astro.props;
-const { data, slug } = service;
+const { service } = Astro.props
+const { data, slug } = service
 ---
 
 <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition group">
-  <a href={`/services/${slug}`} class="block">
-    <div class="w-16 h-16 bg-primary-soft rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary transition">
-      <Icon 
-        name={`bi:${data.icon}`} 
-        class="text-3xl text-primary group-hover:text-white transition"
-      />
-    </div>
-    
-    <h3 class="text-2xl font-bold text-dark mb-4 group-hover:text-primary transition">
-      {data.title}
-    </h3>
-    
-    <p class="text-steel-gray mb-6">
-      {data.description}
-    </p>
-    
-    <span class="text-primary font-semibold flex items-center gap-2 group-hover:gap-3 transition-all">
-      Learn More 
-      <Icon name="bi:arrow-right" class="text-lg" />
-    </span>
-  </a>
+	<a href={`/services/${slug}`} class="block">
+		<div
+			class="w-16 h-16 bg-primary-soft rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary transition"
+		>
+			<Icon name={`bi:${data.icon}`} class="text-3xl text-primary group-hover:text-white transition" />
+		</div>
+
+		<h3 class="text-2xl font-bold text-dark mb-4 group-hover:text-primary transition">
+			{data.title}
+		</h3>
+
+		<p class="text-steel-gray mb-6">
+			{data.description}
+		</p>
+
+		<span class="text-primary font-semibold flex items-center gap-2 group-hover:gap-3 transition-all">
+			Learn More
+			<Icon name="bi:arrow-right" class="text-lg" />
+		</span>
+	</a>
 </div>

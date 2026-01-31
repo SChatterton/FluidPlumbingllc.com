@@ -1,6 +1,6 @@
 ---
 import MainLayout from "@src/layouts/MainLayout.astro";
-import EquipmentCard from "@src/components/EquipmentCard.astro";
+import AreasWeServeCard from "@src/components/AreasWeServeCard.astro";
 import Pagination from "@src/components/Pagination.astro";
 
 import { getCollection } from "astro:content";
@@ -8,11 +8,11 @@ import type { GetStaticPaths } from "astro";
 import HeadingSection from "@src/components/HeadingSection.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  // Get all equipment
-  const allEquipment = await getCollection("equipment");
+  // Get all service areas
+  const allAreas = await getCollection("serviceAreas");
 
-  // Sort equipment by order and filter drafts
-  const equipment = allEquipment
+  // Sort service areas by order and filter drafts
+  const areas = allAreas
     .filter((item) => !item.data.draft)
     .sort((a, b) => {
       if (a.data.order !== b.data.order) {
@@ -25,21 +25,21 @@ export const getStaticPaths = (async ({ paginate }) => {
   const maxPerPage = 9;
 
   // Generate paginated paths
-  return paginate(equipment, { pageSize: maxPerPage });
+  return paginate(areas, { pageSize: maxPerPage });
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
 ---
 
 <MainLayout title={`Equipment Fleet – Page ${page.currentPage} – Constructors`}>
-  <!-- Equipment Showcase -->
+  <!-- Service Areas Showcase -->
   <section class="py-20 bg-bg-soft">
     <HeadingSection label="Equipment Fleet" title="HEAVY MACHINERY" description="Explore Our Extensive Range of Construction Equipment" />
     
     <div class="max-w-7xl mx-auto px-4">
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {page.data.map((item) => (
-          <EquipmentCard equipment={item} />
+          <AreasWeServeCard area={item} />
         ))}
       </div>
 
@@ -48,7 +48,7 @@ const { page } = Astro.props;
           <Pagination 
             currentPage={page.currentPage} 
             totalPages={page.lastPage}
-            basePath="/equipment"
+            basePath="/areas-we-serve"
           />
         </div>
       )}

@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets'
+import HeadingPage from '@src/components/HeadingPage.astro'
+import MainLayout from '@src/layouts/MainLayout.astro'
+
+//Images
+import EmergencyDrainCleaning from '@src/content/gallery/Emergency-drain-cleaning-45429-1152x1536.jpg'
+import FaucetReplacement from '@src/content/gallery/Faucet-replacement-45429.jpg'
+import RootRemoval from '@src/content/gallery/root-removal-45429.jpg'
+import WaterHeaterValve from '@src/content/gallery/gallery-13.webp'
+import WaterHeaterInstall from '@src/content/gallery/Water-heater-install-kettering.jpg'
+import WaterHeaterReplacement from '@src/content/gallery/Water-Heater-Replacement-Kettering-2-1152x1536.jpg'
+
+const images = [
+	{
+		img: EmergencyDrainCleaning,
+		alt: 'Emergency drain cleaning'
+	},
+	{
+		img: FaucetReplacement,
+		alt: 'Faucet replacement'
+	},
+	{
+		img: WaterHeaterValve,
+		alt: 'Water heater valve'
+	},
+	{
+		img: RootRemoval,
+		alt: 'Root removal'
+	},
+	{
+		img: WaterHeaterInstall,
+		alt: 'Water heater installation'
+	},
+	{
+		img: WaterHeaterReplacement,
+		alt: 'Water heater replacement'
+	},
+]
+---
+
+<MainLayout title="Constructors - Professional Construction Solutions">
+	<HeadingPage title="Gallery" image="/img/hero2.jpg" imageAlt="get quote" />
+	<section class="py-20 bg-white">
+		<div class="max-w-7xl mx-auto px-4">
+			<div class="grid gap-8 grid-cols-3">
+				{
+					images.map((image) => (
+						<a href={image.img.src} class="glightbox">
+							<Image src={image.img} alt={image.alt} class="w-full aspect-4/3 object-cover rounded-xl" />
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</MainLayout>

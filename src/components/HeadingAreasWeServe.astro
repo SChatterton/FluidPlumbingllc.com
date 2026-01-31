@@ -18,8 +18,8 @@ export interface Props {
 }
 
 const {
-  label = "NEED EQUIPMENT?",
-  title = "THE RIGHT MACHINES FOR YOUR PROJECT",
+  label = "",
+  title = "Areas We Serve",
 
   intro1 = `
     Searching for reliable heavy equipment for your upcoming project?
@@ -79,7 +79,7 @@ const {
         <div class="grid grid-cols-3 gap-8">
           {stats.map((item) => (
             <div>
-              <div class="text-4xl font-display text-primary font-bold">{item.value}</div>
+              <div class="text-4xl font-display text-primary">{item.value}</div>
               <p class="text-steel-gray">{item.label}</p>
             </div>
           ))}

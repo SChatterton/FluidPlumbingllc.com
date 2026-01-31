@@ -1,14 +1,14 @@
 ---
 import { getCollection } from "astro:content";
 import HeadingSection from "@src/components/HeadingSection.astro";
-import EquipmentCard from "@src/components/EquipmentCard.astro";
+import AreasWeServeCard from "@src/components/AreasWeServeCard.astro";
 import Pagination from "@src/components/Pagination.astro";
 
-// Get all equipment
-const allEquipment = await getCollection("equipment");
+// Get all service areas
+const allAreas = await getCollection("serviceAreas");
 
-// Sort equipment by order and filter drafts
-const equipment = allEquipment
+// Sort areas by order and filter drafts
+const areas = allAreas
   .filter((item) => !item.data.draft)
   .sort((a, b) => {
     // Sort by order first, then by title
@@ -23,19 +23,19 @@ const maxPerPage = 9;
 const currentPage = 1;
 
 // Calculate total pages
-const totalPages = Math.ceil(equipment.length / maxPerPage);
+const totalPages = Math.ceil(areas.length / maxPerPage);
 
-// Get visible equipment for current page
-const visibleEquipment = equipment.slice(0, maxPerPage);
+// Get visible areas for current page
+const visibleAreas = areas.slice(0, maxPerPage);
 ---
 
 <section class="py-20 bg-bg-soft" id="equipment">
-  <HeadingSection label="Equipment Fleet" title="HEAVY MACHINERY" description="Explore Our Extensive Range of Construction Equipment" />
+  <HeadingSection label="Service Areas" title="Proudly serving the greater Dayton, OH area" description="Proudly serving Ohio" />
   
   <div class="max-w-7xl mx-auto px-4">
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {visibleEquipment.map((item) => (
-        <EquipmentCard equipment={item} />
+      {visibleAreas.map((item) => (
+        <AreasWeServeCard area={item} />
       ))}
     </div>
 
@@ -44,7 +44,7 @@ const visibleEquipment = equipment.slice(0, maxPerPage);
         <Pagination 
           currentPage={currentPage} 
           totalPages={totalPages} 
-          basePath="/equipment" 
+          basePath="/areas-we-serve" 
         />
       </div>
     )}

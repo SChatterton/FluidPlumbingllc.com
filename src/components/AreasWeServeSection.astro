@@ -1,52 +1,51 @@
 ---
-import { getCollection } from "astro:content";
-import HeadingSection from "@src/components/HeadingSection.astro";
-import AreasWeServeCard from "@src/components/AreasWeServeCard.astro";
-import Pagination from "@src/components/Pagination.astro";
+import { getCollection } from 'astro:content'
+import HeadingSection from '@src/components/HeadingSection.astro'
+import AreasWeServeCard from '@src/components/AreasWeServeCard.astro'
+import Pagination from '@src/components/Pagination.astro'
 
 // Get all service areas
-const allAreas = await getCollection("serviceAreas");
+const allAreas = await getCollection('serviceAreas')
 
 // Sort areas by order and filter drafts
 const areas = allAreas
-  .filter((item) => !item.data.draft)
-  .sort((a, b) => {
-    // Sort by order first, then by title
-    if (a.data.order !== b.data.order) {
-      return a.data.order - b.data.order;
-    }
-    return a.data.title.localeCompare(b.data.title);
-  });
+	.filter((item) => !item.data.draft)
+	.sort((a, b) => {
+		// Sort by order first, then by title
+		if (a.data.order !== b.data.order) {
+			return a.data.order - b.data.order
+		}
+		return a.data.title.localeCompare(b.data.title)
+	})
 
 // Pagination settings
-const maxPerPage = 9;
-const currentPage = 1;
+const maxPerPage = 9
+const currentPage = 1
 
 // Calculate total pages
-const totalPages = Math.ceil(areas.length / maxPerPage);
+const totalPages = Math.ceil(areas.length / maxPerPage)
 
 // Get visible areas for current page
-const visibleAreas = areas.slice(0, maxPerPage);
+const visibleAreas = areas.slice(0, maxPerPage)
 ---
 
 <section class="py-20 bg-bg-soft" id="equipment">
-  <HeadingSection label="Service Areas" title="Proudly serving the greater Dayton, OH area" description="Proudly serving Ohio" />
-  
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {visibleAreas.map((item) => (
-        <AreasWeServeCard area={item} />
-      ))}
-    </div>
+	<HeadingSection
+		label="Service Areas"
+		title="Proudly serving the greater Dayton, OH area"
+	/>
 
-    {totalPages > 1 && (
-      <div class="flex justify-center mt-16">
-        <Pagination 
-          currentPage={currentPage} 
-          totalPages={totalPages} 
-          basePath="/areas-we-serve" 
-        />
-      </div>
-    )}
-  </div>
+	<div class="max-w-7xl mx-auto px-4">
+		<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+			{visibleAreas.map((item) => <AreasWeServeCard area={item} />)}
+		</div>
+
+		{
+			totalPages > 1 && (
+				<div class="flex justify-center mt-16">
+					<Pagination currentPage={currentPage} totalPages={totalPages} basePath="/areas-we-serve" />
+				</div>
+			)
+		}
+	</div>
 </section>

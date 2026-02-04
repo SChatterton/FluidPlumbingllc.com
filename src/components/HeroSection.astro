@@ -28,7 +28,7 @@ const {
 	// slides = ['/img/hero1.jpg', '/img/hero2.jpg', '/img/hero3.jpg'],
 	title = 'Plumbing problems',
 	highlight = 'fixed fast',
-	subtitle = 'Need a plumber you can actually trust? At Fluid Plumbing, we fix it right the first time with honest pricing, fast turnaround, and clean job sites. Specializing in drain cleaning and water heater installs, we serve Kettering and nearby neighborhoods with no-BS service that puts homeowners first.',
+	subtitle = 'Need a plumber in Dayton, OH you can actually trust? At Fluid Plumbing, we fix it right the first time with honest pricing, fast turnaround, and clean job sites. Specializing in drain cleaning and water heater installs, we serve Kettering and nearby neighborhoods with no-BS service that puts homeowners first.',
 	primaryButton = {
 		label: 'Call: (937) 369-0346',
 		href: 'tel:9373690346',
@@ -48,7 +48,8 @@ const {
 } = Astro.props
 ---
 
-<!-- <section
+{
+	/* <section
 	id={id}
 	class="relative overflow-hidden py-6"
 	x-data=`{
@@ -75,15 +76,14 @@ const {
 			this.start();
 		}
 	}`
-> -->
+> */
+}
 
-<section
-	id={id}
-	class="relative overflow-hidden py-6"
->
+<section id={id} class="relative overflow-hidden py-6">
 	<img src={bgimg} alt="hero background" class="absolute inset-0 w-full h-full object-cover" />
 
-	{/*<!-- SLIDES -->
+	{
+		/* SLIDES
 	{
 		slides.map((slide, index) => (
 			<img
@@ -100,12 +100,13 @@ const {
 				style={index === 0 ? '' : 'display:none;'}
 			/>
 		))
-	}*/}
+	}*/
+	}
 
-	<!-- OVERLAY -->
+	{/* OVERLAY */}
 	<div class="absolute inset-0 bg-linear-to-r from-[#032533]/90 to-sky-950/50"></div>
 
-	<!-- CONTENT -->
+	{/* CONTENT */}
 	<div class="relative py-16 lg:py-24">
 		<div class="max-w-7xl mx-auto px-4">
 			<div class="max-w-3xl">
@@ -116,11 +117,11 @@ const {
 					<span class="text-primary-light">{highlight}</span>
 				</h1>
 
-				<p class="text-xl text-gray-200 mb-8 max-w-2xl">
+				<p class="text-xl text-gray-200 mb-8 max-w-2xl leading-8">
 					{subtitle}
 				</p>
 
-				<!-- BUTTONS -->
+				{/* BUTTONS */}
 				<div class="flex flex-wrap gap-4">
 					{
 						primaryButton && (
@@ -154,7 +155,8 @@ const {
 		</div>
 	</div>
 
-	{/* <!-- DOTS -->
+	{
+		/* DOTS
 	<div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
 		{
 			slides.map((_, index) => (
@@ -167,5 +169,6 @@ const {
 				/>
 			))
 		}
-	</div> */}
+	</div> */
+	}
 </section>

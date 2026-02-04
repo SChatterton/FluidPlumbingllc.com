@@ -1,67 +1,56 @@
 ---
-import ProgressBar from "./ProgressBar.astro";
+import { Image } from 'astro:assets'
+import HeadingPage from '@src/components/HeadingPage.astro'
+import ProgressBar from './ProgressBar.astro'
+import FamilyPhoto from '@src/assets/Family-500x667.jpg'
 
-export interface ProgressItem {
-  label: string;
-  value: number;
-}
+// export interface ProgressItem {
+// 	label: string
+// 	value: number
+// }
 
-export interface Props {
-  image?: string;
-  imageAlt?: string;
-  title?: string;
-  paragraphs?: string[];
-  progress?: ProgressItem[];
-}
-
-const {
-  image = "/img/about.jpg",
-  imageAlt = "Constructors Team & Fleet",
-
-  title = "About Megarent Constructors",
-
-  paragraphs = [
-    "Founded in 1998, Megarent Constructors has grown to become one of the most trusted construction and heavy equipment partners in the United States.",
-    "With a proven track record across infrastructure, industrial, and commercial sectors, we deliver reliability through modern fleets, skilled operators, and strict safety standards.",
-  ],
-
-  progress = [
-    { label: "Project Delivery Efficiency", value: 92 },
-    { label: "Equipment Fleet Availability", value: 88 },
-    { label: "Safety Compliance Rate", value: 97 },
-    { label: "Client Satisfaction Score", value: 94 },
-  ],
-} = Astro.props;
+// const progress = [
+// 	{ label: 'Project Delivery Efficiency', value: 92 },
+// 	{ label: 'Equipment Fleet Availability', value: 88 },
+// 	{ label: 'Safety Compliance Rate', value: 97 },
+// 	{ label: 'Client Satisfaction Score', value: 94 }
+// ]
 ---
 
+<HeadingPage title="About Fluid Plumbing" description="Built on hard work, fairness, and doing the job right." />
 <section class="py-20 bg-white">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
-      <!-- IMAGE -->
-      <div>
-        <img
-          src={image}
-          alt={imageAlt}
-          class="rounded-2xl shadow-2xl"
-        />
-      </div>
+	<div class="max-w-7xl mx-auto px-4">
+		<div class="grid lg:grid-cols-2 gap-16 items-center">
+			<!-- IMAGE -->
+			<div>
+				<Image src={FamilyPhoto} alt="About us" class="aspect-4/3 lg:aspect-1/1 object-cover rounded-2xl shadow-2xl" />
+			</div>
 
-      <!-- CONTENT -->
-      <div>
-        <h1 class="font-display text-4xl md:text-5xl text-dark mb-6">
-          {title}
-        </h1>
-        {paragraphs.map((p) => (
-          <p class="text-lg text-steel-gray mb-6">{p}</p>
-        ))}
-
-        <!-- PROGRESS GRID -->
-        <div class="grid grid-cols-1 gap-4">
-          {progress.map((item) => (
-            <ProgressBar label={item.label} value={item.value} />
-          ))}
-        </div>
-      </div>
-    </div>
-  </div>
+			<!-- CONTENT -->
+			<div class="space-y-6">
+				<p>
+					My name's Shane Chatterton, and I started Fluid Plumbing with one goal: to offer quality plumbing services
+					at fair prices, without the upsells, gimmicks, or shortcuts I saw working for other companies.
+				</p>
+				<p>
+					Before going out on my own, I'd meet homeowners in stressful situations, from leaks to breakdowns to flooded
+					basements, and I couldn't help them the way I wanted to because of company policies or sales quotas. That
+					didn't sit right with me. So I started this business to do things differently.
+				</p>
+				<p>
+					At Fluid Plumbing, we take the time to <strong>do the job right the first time</strong> &mdash; no rush jobs,
+					no patchwork. I treat every customer like family and only recommend work that's truly needed.
+				</p>
+				<p>
+					We work throughout <strong>Kettering, Dayton, and the surrounding areas</strong>, handling everything from
+					clogged drains and pipe repairs to full water heater installs.
+				</p>
+				<p>
+					I live right here in Kettering with my wife and two daughters. I'm big on family, big on fishing, and built
+					this business from the ground up with the kind of work ethic you develop when you grow up knowing exactly
+					who you don't want to be.
+				</p>
+			</div>
+		</div>
+	</div>
 </section>

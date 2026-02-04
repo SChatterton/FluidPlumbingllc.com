@@ -37,6 +37,14 @@
 	[role='button'] {
 		cursor: pointer;
 	}
+	select {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='34px' height='20px' viewBox='0 0 24 24' stroke-width='2' stroke='%2370757a' fill='none' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6l6 -6'/></svg>");
+		background-position: center right;
+		background-repeat: no-repeat;
+	}
 }
 @custom-variant dark (&:where(.dark, .dark *));
 .hero-overlay {
@@ -44,12 +52,6 @@
 }
 .diagonal-split {
 	clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-}
-.service-area-card {
-	transition: all 0.3s ease;
-}
-.service-area-card:hover {
-	transform: translateY(-8px);
 }
 .stat-number {
 	font-size: 3.5rem;
@@ -366,15 +368,15 @@
 
 /* Lists */
 .post-content ul {
-	@apply list-disc list-inside mb-4 space-y-1;
+	@apply list-disc ml-8 mb-4 space-y-1;
 }
 
 .post-content ol {
-	@apply list-decimal list-inside mb-4 space-y-1;
+	@apply list-decimal ml-8 mb-4 space-y-1;
 }
 
 .post-content li {
-	@apply text-base leading-relaxed;
+	@apply text-base md:text-lg leading-relaxed;
 }
 
 .post-content ul ul,

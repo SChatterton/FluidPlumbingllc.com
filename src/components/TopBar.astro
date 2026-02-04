@@ -1,63 +1,67 @@
 ---
-import { Icon } from "astro-icon/components";
+import { Icon } from 'astro-icon/components'
 
 export interface ContactItem {
-  href: string;
-  icon: string;
-  textShort: string;
-  textFull: string;
+	href: string
+	icon: string
+	textShort: string
+	textFull: string
 }
 
 export interface Props {
-  contacts?: ContactItem[];
-  socials?: { href: string; name: string; icon: string }[];
+	contacts?: ContactItem[]
+	socials?: { href: string; name: string; icon: string }[]
 }
 
 const {
-  contacts = [
-    {
-      href: "tel:9373690346",
-      icon: "bi:telephone-fill",
-      textShort: "Call",
-      textFull: "(937) 369-0346",
-    },
-    {
-      href: "mailto:info@fluidplumbingllc.com",
-      icon: "bi:envelope-fill",
-      textShort: "Send Email",
-      textFull: "info@fluidplumbingllc.com",
-    },
-  ],
-  socials = [
-    // { href: "#", name: "Facebook", icon: "bi:facebook" },
-    // { href: "#", name: "Instagram", icon: "bi:instagram" },
-    // { href: "#", name: "Linkedin", icon: "bi:linkedin" },
-  ],
-} = Astro.props;
+	contacts = [
+		{
+			href: 'tel:9373690346',
+			icon: 'bi:telephone-fill',
+			textShort: 'Call',
+			textFull: '(937) 369-0346'
+		},
+		{
+			href: 'mailto:info@fluidplumbingllc.com',
+			icon: 'bi:envelope-fill',
+			textShort: 'Send Email',
+			textFull: 'info@fluidplumbingllc.com'
+		}
+	],
+	socials = [
+		// { href: "#", name: "Facebook", icon: "bi:facebook" },
+		// { href: "#", name: "Instagram", icon: "bi:instagram" },
+		// { href: "#", name: "Linkedin", icon: "bi:linkedin" },
+	]
+} = Astro.props
 ---
 
-<div class="bg-dark-deep text-white py-2 text-sm">
-  <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-    <!-- CONTACT -->
-    <div class="flex items-center gap-6">
-      {contacts.map((c) => (
-        <a href={c.href} class="hover:text-primary-light transition">
-          <span class="flex items-center gap-2">
-            <Icon name={c.icon} class="text-primary w-4 h-4" />
-            <span class="sm:hidden">{c.textShort}</span>
-            <span class="max-sm:hidden">{c.textFull}</span>
-          </span>
-        </a>
-      ))}
-    </div>
+<div class="bg-dark-deep text-white py-2 text-sm hidden lg:block">
+	<div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+		<!-- CONTACT -->
+		<div class="flex items-center gap-6">
+			{
+				contacts.map((c) => (
+					<a href={c.href} class="hover:text-primary-light transition">
+						<span class="flex items-center gap-2">
+							<Icon name={c.icon} class="text-primary w-4 h-4" />
+							<span class="sm:hidden">{c.textShort}</span>
+							<span class="max-sm:hidden">{c.textFull}</span>
+						</span>
+					</a>
+				))
+			}
+		</div>
 
-    <!-- SOCIALS -->
-    <div class="flex items-center gap-4">
-      {socials.map((s) => (
-        <a href={s.href} class="hover:text-primary-light transition" aria-label={s.name}>
-          <Icon name={s.icon} class="w-4 h-4" />
-        </a>
-      ))}
-    </div>
-  </div>
+		<!-- SOCIALS -->
+		<div class="flex items-center gap-4">
+			{
+				socials.map((s) => (
+					<a href={s.href} class="hover:text-primary-light transition" aria-label={s.name}>
+						<Icon name={s.icon} class="w-4 h-4" />
+					</a>
+				))
+			}
+		</div>
+	</div>
 </div>

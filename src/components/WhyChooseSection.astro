@@ -1,0 +1,115 @@
+---
+import { Image } from 'astro:assets'
+import { Icon } from 'astro-icon/components'
+import HeadingSection from './HeadingSection.astro'
+import Pipes from '@src/assets/pipes-2672184_1280.jpg'
+
+export interface Props {
+	label?: string
+	title?: string
+	description?: string
+	image?: ImageMetadata
+	imageAlt?: string
+}
+
+// export interface TimelineItem {
+// 	year: string | number
+// 	title: string
+// 	description: string
+// }
+
+// const timeline: TimelineItem[] = [
+// 	{
+// 		year: '2025',
+// 		title: 'Today',
+// 		description:
+// 			'Over 250 late-model heavy equipment units, 12 facilities across California, 400+ certified operators, and more than 1,500 successful projects delivered.'
+// 	},
+// 	{
+// 		year: '2015',
+// 		title: 'Statewide Recognition',
+// 		description:
+// 			'Awarded key contracts for California High-Speed Rail and major renewable energy developments. Achieved 150+ units and 8 locations statewide.'
+// 	},
+// 	{
+// 		year: '2006',
+// 		title: 'First Major Expansion',
+// 		description:
+// 			'Opened additional yards in Sacramento and San Diego. Fleet grew to over 80 modern units serving infrastructure and energy projects.'
+// 	},
+// 	{
+// 		year: '1998',
+// 		title: 'The Beginning',
+// 		description: 'Founded in Los Angeles with just 8 used excavators and a small team of dedicated operators.'
+// 	}
+// ]
+
+const {
+	label,
+	title,
+	description,
+
+	image = Pipes,
+	imageAlt = 'Company Journey'
+} = Astro.props
+---
+
+<section class="py-20 bg-gray-50">
+	<div class="max-w-7xl mx-auto px-4">
+		<!-- HEADING -->
+		<HeadingSection label={label} title={title} description={description} align="center" />
+
+		<!-- TIMELINE GRID -->
+		<div class="grid lg:grid-cols-2 gap-16 items-center">
+			<!-- TIMELINE COLUMN -->
+			<div class="order-2 lg:order-1 space-y-6">
+				<p>There's no shortage of plumbers in the Dayton area. But if you're tired of no-shows, rushed work, or sales pitches, you're in the right place. We show up, solve the problem, and respect your home like it's our own.</p>
+				<p>At Fluid Plumbing, we keep it simple:</p>
+				<ul class="space-y-5 text-dark">
+					<li class="flex items-start gap-4">
+						<Icon name="bi:check-circle-fill" class="text-2xl text-primary mt-0.5 shrink-0" />
+						<span><strong>Fair, upfront pricing</strong><br>With no surprise add-ons.</span>
+					</li>
+					<li class="flex items-start gap-4">
+						<Icon name="bi:check-circle-fill" class="text-2xl text-primary mt-0.5 shrink-0" />
+						<span><strong>Clean, professional work</strong><br>No mess left behind.</span>
+					</li>
+					<li class="flex items-start gap-4">
+						<Icon name="bi:check-circle-fill" class="text-2xl text-primary mt-0.5 shrink-0" />
+						<span><strong>Work done right the first time</strong><br>No band-aid fixes.</span>
+					</li>
+					<li class="flex items-start gap-4">
+						<Icon name="bi:check-circle-fill" class="text-2xl text-primary mt-0.5 shrink-0" />
+						<span><strong>Real communication</strong><br>We explain what's going on in plain terms.</span>
+					</li>
+					<li class="flex items-start gap-4">
+						<Icon name="bi:check-circle-fill" class="text-2xl text-primary mt-0.5 shrink-0" />
+						<span><strong>Local service</strong><br>From a business that actually cares.</span>
+					</li>
+					<p></p
+				</ul>
+				<!-- <div class="space-y-10">
+					{
+						timeline.map((item) => (
+							<div class="flex gap-6">
+								<div class="shrink-0 w-20 h-20 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold">
+									{item.year}
+								</div>
+
+								<div class="relative">
+									<h3 class="text-xl md:text-2xl font-bold text-dark mb-2">{item.title}</h3>
+									<p class="text-steel-gray">{item.description}</p>
+								</div>
+							</div>
+						))
+					}
+				</div> -->
+			</div>
+
+			<!-- IMAGE COLUMN -->
+			<div class="order-1 lg:order-2">
+				<Image src={image} alt={imageAlt} class="rounded-2xl shadow-2xl w-full object-cover lg:aspect-4/3" />
+			</div>
+		</div>
+	</div>
+</section>

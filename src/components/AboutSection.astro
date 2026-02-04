@@ -1,67 +1,63 @@
 ---
+import { Image } from 'astro:assets'
+import { Icon } from 'astro-icon/components'
+import SideImage from '@src/assets/Fluid-Plumbing-Kettering-Toilet-Replacement.jpg'
+import Button from './Button.astro'
+
 export interface AboutStat {
 	number: number
 	suffix?: string
 	label: string
 }
 
-export interface Props {
-	image?: string
-	imageAlt?: string
-	badgeText?: string
-	title?: string
-	paragraphs?: string[]
-	stats?: AboutStat[]
-}
-
-const {
-	image = '/img/about.jpg',
-	imageAlt = 'Constructors Team & Fleet',
-
-	badgeText = 'About Us',
-
-	title = '10+ years of excellence',
-
-	paragraphs = [
-		'Founded in 1998, Constructors has grown to become one of the largest and most trusted heavy equipment providers in United States.',
-		'With a fleet of over 250 modern units, nationwide branches, and more than 400 certified operators, we deliver reliable solutions for infrastructure, mining, energy, and property projects across the archipelago.'
-	],
-
-	stats = [
-		{ number: 250, suffix: '+', label: 'Units Ready to Deploy' },
-		{ number: 15, label: 'Branches Nationwide' },
-		{ number: 1500, suffix: '+', label: 'Projects Completed' },
-		{ number: 400, suffix: '+', label: 'Certified Operators' }
-	]
-} = Astro.props
+const stats: AboutStat[] = [
+	{ number: 450, suffix: '+', label: 'Residential & Commercial Projects' },
+	{ number: 10, suffix: '+', label: "Years' of Plumbing Expertise" },
+	{ number: 5, label: 'Star Ratings Across Google & Yelp' }
+]
 ---
 
 <section class="py-20 bg-white">
 	<div class="max-w-7xl mx-auto px-4">
-		<div class="grid lg:grid-cols-2 gap-12 items-center">
-			<!-- IMAGE -->
+		<div class="grid lg:grid-cols-2 gap-16 items-center">
+			{/* IMAGE */}
 			<div>
-				<img src={image} alt={imageAlt} class="rounded-2xl shadow-2xl" />
+				<Image
+					src={SideImage}
+					alt="Fluid Plumbing toilet replacement"
+					class="rounded-2xl shadow-2xl aspect-1/1 object-cover"
+				/>
 			</div>
-			<!-- CONTENT -->
+			{/* CONTENT */}
 			<div>
-				<!-- BADGE -->
+				{/* BADGE */}
 				<div class="inline-block px-4 py-2 bg-primary-soft text-primary-dark rounded-full font-semibold mb-6">
-					{badgeText}
+					About Us
 				</div>
 
-				<!-- TITLE -->
-				<h2 class="font-display text-4xl md:text-5xl text-dark mb-6">
-					{title}
-				</h2>
+				{/* TITLE */}
+				<h2 class="font-display text-4xl md:text-5xl text-dark mb-6">10+ years of plumbing excellence</h2>
 
-				<!-- PARAGRAPHS -->
+				{/* PARAGRAPHS */}
 				<div class="post-content text-lg text-steel-gray space-y-4 mb-8">
-					{paragraphs.map((p) => <p>{p}</p>)}
+					<p>
+						With over a decade of expertise under our team's belt, we're proud to serve the greater Dayton, OH
+						area's plumbing needs.
+					</p>
+					<p>
+						From clogged drains to toilet replacements, waters heater installs to water system overhauls, we do it
+						all. Whether you need emergency residential plumbing in Kettering or Dayton, or are looking to schedule
+						larger commercial plumbing projects, our team is always ready to accommodate.
+					</p>
+					<Button href="/about" variant="primary" size="md" class="!text-white !no-underline mt-6">
+						About Us
+						<Icon name="bi:arrow-right" />
+					</Button>
 				</div>
 
-				<!-- STATS GRID with Animated Counters -->
-				<div class="grid grid-cols-2 gap-8">
+				{/* STATS GRID with Animated Counters */}
+				{
+					/* <div class="grid grid-cols-3 gap-8">
 					{
 						stats.map((s) => (
 							<div>
@@ -78,7 +74,8 @@ const {
 							</div>
 						))
 					}
-				</div>
+				</div> */
+				}
 			</div>
 		</div>
 	</div>

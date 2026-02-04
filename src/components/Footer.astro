@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components'
+import { getCollection } from 'astro:content'
 
 export interface SocialItem {
 	href: string
@@ -12,69 +13,103 @@ export interface LinkItem {
 	href: string
 }
 
-export interface CertImage {
-	src: string
-	alt: string
-	height?: string
-}
+const logo = '/img/logo-white.png'
+const description = 'Your trusted partner for residential and commercial plumbing in Dayton and Kettering, OH.'
 
-export interface Props {
-	logo?: string
-	description?: string
-	socials?: SocialItem[]
-	quickLinks?: LinkItem[]
-	serviceLinks?: LinkItem[]
-	certifications?: CertImage[]
-	copyrightName?: string
-	copyrightText?: string
-	year?: number
-}
+// Get all services
+const allServices = await getCollection('service')
+const services = allServices
+	.filter((item) => !item.data.draft)
+	.sort((a, b) => {
+		// Sort by order first, then by title
+		if (a.data.order !== b.data.order) {
+			return a.data.order - b.data.order
+		}
+		return a.data.title.localeCompare(b.data.title)
+	})
 
-const {
-	logo = '/img/logo-white.png',
+const serviceLinks: LinkItem[] = services.map((service) => { 
+	return {
+		name: service.data.title, href: service.slug
+	}
+})
 
-	description = 'Your trusted partner for residential and commercial plumbing in Dayton and Kettering, OH.',
+const quickLinks: LinkItem[] = [
+	{ name: 'Home', href: '/' },
+	{ name: 'Service Areas', href: '/areas-we-serve' },
+	{ name: 'About Us', href: '/about' },
+	{ name: 'Contact', href: '/contact' },
+	{ name: 'Privacy Policy', href: '/privacy' },
+	{ name: 'Terms of Services', href: '/terms' }
+]
 
-	socials = [
-		// { href: '#', name: 'Facebook', icon: 'bi:facebook' },
-		// { href: '#', name: 'Instagram', icon: 'bi:instagram' },
-		// { href: '#', name: 'Linkedin', icon: 'bi:linkedin' },
-		// { href: '#', name: 'Youtube', icon: 'bi:youtube' }
-	],
+const copyrightName = 'Fluid Plumbing LLC'
+const copyrightText = 'All rights reserved.'
+const year = new Date().getFullYear()
 
-	quickLinks = [
-		{ name: 'Documentation', href: '/documentation' },
-		{ name: 'Services', href: '/service' },
-		{ name: 'Service Areas', href: '/areas-we-serve' },
-		{ name: 'Privacy Policy', href: '/privacy' },
-		{ name: 'Terms of Services', href: '/terms' }
-	],
-
-	serviceLinks = [
-		{ name: 'Equipment Rental', href: '/equipment-rental' },
-		{ name: 'Operator Supply', href: '/operator-services' },
-		{ name: 'Project Consulting', href: '/project-consulting' },
-		{ name: 'Maintenance', href: '/equipment-maintenance' },
-		{ name: 'Safety Training', href: '/safety-training' }
-	],
-
-	certifications = [
-		{ src: '/img/iso-9001.png', alt: 'ISO 9001', height: 'h-16' },
-		{ src: '/img/iso-4500.png', alt: 'ISO 4500', height: 'h-16' },
-		{ src: '/img/osha10.png', alt: 'OSHA 10', height: 'h-12' }
-	],
-
-	copyrightName = 'Fluid Plumbing LLC',
-	copyrightText = 'All rights reserved.',
-	year = new Date().getFullYear()
-} = Astro.props
+const socials: SocialItem[] = [
+	// { href: '#', name: 'Facebook', icon: 'bi:facebook' },
+	// { href: '#', name: 'Instagram', icon: 'bi:instagram' },
+	// { href: '#', name: 'Linkedin', icon: 'bi:linkedin' },
+	// { href: '#', name: 'Youtube', icon: 'bi:youtube' }
+]
 ---
 
 <footer class="bg-dark-deep relative text-white">
 	<div class="h-1 pipe-divider"></div>
 	<div class="max-w-7xl mx-auto px-4 relative py-16">
-		<div class="grid md:grid-cols-2 lg:grid-cols-5 gap-10">
-			<!-- BRAND COLUMN -->
+		<div class="flex flex-wrap gap-16">
+			<div class="max-w-md mr-auto">
+				<div class="flex items-center gap-3 mb-4">
+					<img src={logo} alt="logo light" class="max-w-56" />
+				</div>
+				<p class="text-metal-gray mb-6">{description}</p>
+				{socials && <div class="flex gap-4">
+					{
+						socials.map((s) => (
+							<a
+								href={s.href}
+								aria-label={s.name}
+								class="w-10 h-10 bg-dark-surface rounded-lg flex items-center justify-center hover:bg-primary transition"
+							>
+								<Icon name={s.icon} class="w-5 h-5" />
+							</a>
+						))
+					}
+				</div>}
+			</div>
+			<div class="flex gap-16 md:flex-nowrap">
+				<div>
+					<h3 class="text-xl font-bold mb-6">Quick Links</h3>
+					<ul class="space-y-3 text-metal-gray">
+						{
+							quickLinks.map((l) => (
+								<li>
+									<a href={l.href} class="hover:text-primary-light transition">
+										{l.name}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+				<div>
+					<h3 class="text-xl font-bold mb-6">Services</h3>
+					<ul class="space-y-3 text-metal-gray">
+						{
+							serviceLinks.map((s) => (
+								<li>
+									<a href={s.href} class="hover:text-primary transition">
+										{s.name}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-10">
 			<div class="lg:col-span-2 lg:pe-12">
 				<div class="flex items-center gap-3 mb-4">
 					<img src={logo} alt="logo light" class="max-w-56" />
@@ -94,8 +129,6 @@ const {
 					}
 				</div>
 			</div>
-
-			<!-- QUICK LINKS -->
 			<div>
 				<h3 class="text-xl font-bold mb-6">Quick Links</h3>
 				<ul class="space-y-3 text-metal-gray">
@@ -110,8 +143,6 @@ const {
 					}
 				</ul>
 			</div>
-
-			<!-- SERVICES -->
 			<div>
 				<h3 class="text-xl font-bold mb-6">Services</h3>
 				<ul class="space-y-3 text-metal-gray">
@@ -126,15 +157,7 @@ const {
 					}
 				</ul>
 			</div>
-
-			<!-- CERTIFICATIONS -->
-			<div>
-				<h3 class="text-xl font-bold mb-6">Certifications</h3>
-				<div class="flex flex-wrap gap-4">
-					{certifications.map((c) => <img src={c.src} alt={c.alt} class={`${c.height} opacity-80`} />)}
-				</div>
-			</div>
-		</div>
+		</div> -->
 
 		<!-- COPYRIGHT -->
 		<div class="border-t border-dark-surface mt-12 pt-8 text-center text-metal-gray">

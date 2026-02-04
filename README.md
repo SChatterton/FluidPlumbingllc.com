@@ -1,32 +1,10 @@
 
-# 🎉 Thank You for Choosing Constructors Astro!
-First of all, we thank you for your purchase and willingness of using Constructors Astro in your projects!
+# Fluid Plumbing LLC
 
-Constructors Astro is Astro.Build Tailwind Landingpage Template for Construction Industry, this template is easy to development.
+## How to:
 
-## 🚀 How to Get Started
+### Add/Edit Pages
 
-To unlock full development flexibility:
+### Add/Edit Services & Areas We Serve
 
-#### Install dependencies
-npm install
-
-#### Start local development server
-npm run dev (http://localhost:4321/)
-
-#### Build production files
-npm run build
-
-More documentation open `/documentation` page and Constructors Astro documentation will guide you with detailed step by step information.
-
-### License ###
-
-Constructors Astro is licensed under single, multiple and Extended License
-
-### Free updates and support ###
-
-After purchasing a Constructors Astro Template copy, you get the right for a lifetime entitlement to download updates for FREE! Need help? For any questions or concerns, reach us out at Techdasmin@gmail.com
-
-### Have idea for next update? ###
-
-If you have any idea for next update or find bugs in template, We is very happy if you give idea or suggestion
+### Add/Edit Gallery Photos

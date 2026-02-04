@@ -1,99 +1,68 @@
 ---
+import { Image } from 'astro:assets'
+import WaterHeater from '@src/assets/water-heater.jpg'
+
 export interface StatItem {
-  value: string;   // exp: "150+" atau "Expert"
-  label: string;   // exp: "Equipment Types"
+	value: string // exp: "150+" atau "Expert"
+	label: string // exp: "Equipment Types"
 }
 
 export interface Props {
-  label?: string;
-  title?: string;
+	intro1?: string
+	intro2?: string
 
-  intro1?: string;
-  intro2?: string;
+	stats?: StatItem[]
 
-  stats?: StatItem[];
-
-  image?: string;
-  imageAlt?: string;
+	image?: string
+	imageAlt?: string
 }
 
 const {
-  label = "",
-  title = "Areas We Serve",
+	stats = [
+		{ value: '450+', label: 'Residential & Commercial Projects' },
+		{ value: '10+', label: 'Years of Plumbing Expertise' },
+		{ value: '5', label: 'Star Ratings Across Google & Yelp' }
+	],
 
-  intro1 = `
-    Searching for reliable heavy equipment for your upcoming project?
-    Many contractors struggle to find the right machines, with availability,
-    specification mismatches, or unclear rental options slowing down progress.
-  `,
-
-  intro2 = `
-    At Megarent Constructors, we offer a complete range of excavators, bulldozers,
-    loaders, cranes, dump trucks, and more. Our team is ready to help you choose
-    the best equipment based on your project scale, terrain, and timeline.
-    Contact us anytime for a free consultation and expert guidance.
-  `,
-
-  stats = [
-    { value: "150+", label: "Equipment Types" },
-    { value: "Expert", label: "Consultation Support" },
-    { value: "24/7", label: "Customer Assistance" },
-  ],
-
-  image = "/img/client.jpg",
-  imageAlt = "Equipment Consultation",
-} = Astro.props;
+	image = '/img/client.jpg',
+	imageAlt = 'Equipment Consultation'
+} = Astro.props
 ---
 
 <section class="py-20 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
-      <!-- LEFT CONTENT -->
-      <div>
-        <!-- LABEL -->
-        {label && (
-          <div class="inline-block px-4 py-2 bg-primary-soft text-primary-dark rounded-full font-semibold mb-6">
-            {label}
-          </div>
-        )}
-        <!-- TITLE -->
-        {title && (
-          <h1 class="font-display text-4xl md:text-5xl text-dark mb-6">
-            {title}
-          </h1>
-        )}
-        <!-- INTRO PARAGRAPH 1 -->
-        {intro1 && (
-          <p class="text-lg text-steel-gray mb-6">
-            {intro1}
-          </p>
-        )}
-        <!-- INTRO PARAGRAPH 2 -->
-        {intro2 && (
-          <p class="text-lg text-steel-gray mb-8">
-            {intro2}
-          </p>
-        )}
+	<div class="max-w-7xl mx-auto px-4">
+		<div class="grid lg:grid-cols-2 gap-16 items-center">
+			<!-- LEFT CONTENT -->
+			<div class="space-y-6">
+				<!-- INTRO PARAGRAPH 1 -->
+				<p>
+					Our team is dedicated to providing exceptional service to all of our clients,
+					no matter where they are located. We know that finding a reliable plumbing service can be a challenge, which
+					is why we strive to make the process as straightforward as possible. We are committed to providing
+					exceptional customer service, and we are always available to answer any questions you may have.
+				</p>
+				<p>
+					Thank you for considering us for your plumbing needs. We are excited to serve you in your area and look
+					forward to working with you.
+				</p>
 
-        <!-- STATS GRID -->
-        <div class="grid grid-cols-3 gap-8">
-          {stats.map((item) => (
-            <div>
-              <div class="text-4xl font-display text-primary">{item.value}</div>
-              <p class="text-steel-gray">{item.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+				<!-- STATS GRID -->
+				<div class="grid grid-cols-3 gap-8 mt-16">
+					{
+						stats.map((item) => (
+							<div>
+								<div class="text-4xl font-display text-primary">{item.value}</div>
+								<p class="text-steel-gray">{item.label}</p>
+							</div>
+						))
+					}
+				</div>
+			</div>
 
-      <!-- RIGHT IMAGE -->
-      <div>
-        <img
-          src={image}
-          alt={imageAlt}
-          class="rounded-2xl shadow-2xl"
-        />
-      </div>
-    </div>
-  </div>
+			<!-- RIGHT IMAGE -->
+			<div>
+				<Image src={WaterHeater} alt="Water heater" class="rounded-2xl shadow-2xl object-cover aspect-4/3" />
+			</div>
+		</div>
+	</div>
 </section>

@@ -1,149 +1,130 @@
 ---
-import { Icon } from "astro-icon/components";
-import Brands from "./Brands.astro";
+import { Icon } from 'astro-icon/components'
 
 export interface Testimonial {
-  name: string;
-  role: string;
-  image: string;
-  quote: string;
+	name: string
+	location: string
+	quote: string
 }
 
-export interface Props {
-  testimonials?: Testimonial[];
-}
-
-const {
-  testimonials = [
-    {
-      name: 'Richard Malone',
-      role: 'Project Director, Skyline Infrastructure',
-      image: '/img/male1.jpg',
-      quote: 'Their team delivered our commercial building ahead of schedule with exceptional workmanship. Truly reliable and highly professional.'
-    },
-    {
-      name: 'Emily Carter',
-      role: 'Facility Manager, GreenLeaf Manufacturing',
-      image: '/img/female1.jpg',
-      quote: 'From planning to execution, every step was handled with precision. The quality of their construction far exceeded our expectations.'
-    },
-    {
-      name: 'Christopher Hayes',
-      role: 'Senior Engineer, UrbanBuild Consultants',
-      image: '/img/male2.jpg',
-      quote: 'A trustworthy partner for large-scale projects. Their attention to safety, detail, and engineering standards is outstanding.'
-    },
-    {
-      name: 'Samantha Rivera',
-      role: 'Real Estate Developer, Rivera Properties',
-      image: '/img/female2.jpg',
-      quote: 'They transformed our development vision into reality with remarkable efficiency and craftsmanship. Highly recommended for any construction project.'
-    },
-    {
-      name: 'Daniel Brooks',
-      role: 'Operations Manager, NorthBridge Logistics',
-      image: '/img/male3.jpg',
-      quote: 'Professional, organized, and transparent throughout the entire project. The end result was durable, high-quality, and built to last.'
-    }
-  ]
-} = Astro.props;
+const testimonials: Testimonial[] = [
+	{
+		name: 'Amythist M.',
+		location: 'Kettering',
+		quote: 'Shane went above and beyond for me today! Poor guy was on the roof and trying everything he could, working outside until the sun went all the way down to get me back up and running. It was a nasty job but he kept a positive attitude and got it done! More affordable than any other place I called and the customer service was a 10 out of 10. Would definitely use them again!'
+	},
+	{
+		name: 'Nicola B.',
+		location: 'Dayton',
+		quote: "Shane didn't hesitate to step up in a big way and offer his expertise pro bono. He took the time to help me out by not only picking up the heater but installing it for free.. My family appreciates his kindness!! If anyone is looking for a kind and knowledgeable plumbing professional - give Shane a call!"
+	},
+	{
+		name: 'Cheyenne M.',
+		location: 'Dayton',
+		quote: "Quick, affordable, and professional! Shane is a man of action, he will get you right. I had a great experience with this company and I will definitely be a returning customer. He brought me peace of mind when my sewer line was leaking in my basement. I was worried sick over it and Shane was out so fast and fixed the problem so quickly I didn't have to worry for long. I would recommend this company to anyone looking for a plumber!! Thank you Fluid Plumbing !!!!"
+	},
+	{
+		name: 'Connie L.',
+		location: 'Riverside',
+		quote: 'I got several quotes for water softener replacement and Fluid plumbing beat them all. Shane and his co-worker did an excellent job. They were prompt to arrive, courteous to answer my many questions, patiently showed my how to operate the tank, and cleaned up after the job was done. I highly recommend them.'
+	},
+	{
+		name: 'Brittany L.',
+		location: 'Dayton',
+		quote: 'Shane from Fluid Plumbing did an excellent job with our house! We purchased a new house and needless to say, there were lots of issues. Shane came out in a timely manner and his communication with us was amazing. He fixed all of the issues within the house and gave us a fair price. Shane was extremely professional, knowledgeable, and kind. I highly recommend this company!'
+	}
+]
 ---
 
 <section class="py-20 bg-bg-soft overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="text-center mb-16">
-      <div class="inline-block px-4 py-2 bg-primary-soft text-primary-dark rounded-full font-semibold mb-4">
-        CLIENT TESTIMONIALS
-      </div>
-      <h2 class="font-display text-4xl md:text-5xl text-dark mb-4">New happy customers every day</h2>
-    </div>
+	<div class="max-w-7xl mx-auto px-4">
+		<div class="text-center mb-16">
+			<div class="inline-block px-4 py-2 bg-primary-soft text-primary-dark rounded-full font-semibold mb-4">
+				Client Testimonials
+			</div>
+			<h2 class="font-display text-4xl md:text-5xl text-dark mb-4">More happy customers every day</h2>
+		</div>
 
-    <div class="max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-2 gap-12">
-        <div
-        x-data=`{
-            currentSlide: 0,
-            
-            nextSlide() {
-            this.currentSlide = (this.currentSlide + 1) % ${testimonials.length};
-            },
-            
-            prevSlide() {
-            this.currentSlide = (this.currentSlide - 1 + ${testimonials.length}) % ${testimonials.length};
-            }
-        }`
-        class="relative group"
-        >
-        <!-- Testimonial Cards -->
-        <div class="w-full overflow-hidden">
-            <div 
-            class="flex transition-transform duration-500 ease-in-out"
-            x-bind:style="`transform: translateX(-${currentSlide * 100}%)`"
-            >
-            {testimonials.map((testimonial, index) => (
-                <div class="w-full shrink-0 px-4">
-                <div class="bg-white rounded-xl shadow-lg p-8 md:p-12 mb-3">
-                    <div class="flex gap-2 text-accent-yellow mb-4">
-                    <Icon name="bi:star-fill" class="w-5 h-5" />
-                    <Icon name="bi:star-fill" class="w-5 h-5" />
-                    <Icon name="bi:star-fill" class="w-5 h-5" />
-                    <Icon name="bi:star-fill" class="w-5 h-5" />
-                    <Icon name="bi:star-fill" class="w-5 h-5" />
-                    </div>
+		<div
+			x-data=`{
+						currentSlide: 0,
+						
+						nextSlide() {
+						this.currentSlide = (this.currentSlide + 1) % ${testimonials.length};
+						},
+						
+						prevSlide() {
+						this.currentSlide = (this.currentSlide - 1 + ${testimonials.length}) % ${testimonials.length};
+						}
+				}`
+			class="relative group max-w-3xl mx-auto"
+		>
+			<!-- Testimonial Cards -->
+			<div class="w-full overflow-hidden">
+				<div
+					class="flex transition-transform duration-500 ease-in-out"
+					x-bind:style="`transform: translateX(-${currentSlide * 100}%)`"
+				>
+					{
+						testimonials.map((testimonial, index) => (
+							<div class="w-full shrink-0 px-4">
+								<div class="bg-white rounded-xl shadow-lg p-8 md:p-12 mb-3">
+									<div class="flex gap-2 text-accent-yellow mb-4">
+										<Icon name="bi:star-fill" class="w-5 h-5" />
+										<Icon name="bi:star-fill" class="w-5 h-5" />
+										<Icon name="bi:star-fill" class="w-5 h-5" />
+										<Icon name="bi:star-fill" class="w-5 h-5" />
+										<Icon name="bi:star-fill" class="w-5 h-5" />
+									</div>
 
-                    <p class="text-steel-gray italic mb-6 text-lg">
-                    "{testimonial.quote}"
-                    </p>
+									<p class="text-steel-gray italic mb-6 text-lg">"{testimonial.quote}"</p>
 
-                    <div class="flex items-center gap-4">
-                    <img 
-                        src={testimonial.image} 
-                        alt={testimonial.name}
-                        class="w-14 h-14 rounded-full object-cover"
-                    />
-                    <div>
-                        <h3 class="font-bold text-dark">{testimonial.name}</h3>
-                        <p class="text-sm text-steel-gray">{testimonial.role}</p>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            ))}
-            </div>
-        </div>
+									<div class="flex items-center gap-4">
+										<div>
+											<h3 class="font-bold text-dark">{testimonial.name}</h3>
+											<p class="text-sm text-steel-gray">{testimonial.location}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
 
-        <!-- Navigation Buttons -->
-        <button
-            type="button"
-            aria-label="Previous testimonial"
-            x-on:click="prevSlide()"
-            class="opacity-100 md:opacity-0 md:group-hover:opacity-100 duration-500 absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-opacity-80 transition-all shadow-lg"
-        >
-            <Icon name="bi:chevron-left" class="w-6 h-6" />
-        </button>
+			<!-- Navigation Buttons -->
+			<button
+				type="button"
+				aria-label="Previous testimonial"
+				x-on:click="prevSlide()"
+				class="opacity-100 md:opacity-0 md:group-hover:opacity-100 duration-500 absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-opacity-80 transition-all shadow-lg"
+			>
+				<Icon name="bi:chevron-left" class="w-6 h-6" />
+			</button>
 
-        <button
-            type="button"
-            aria-label="Next testimonial"
-            x-on:click="nextSlide()"
-            class="opacity-100 md:opacity-0 md:group-hover:opacity-100 duration-500 absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-opacity-80 transition-all shadow-lg"
-        >
-            <Icon name="bi:chevron-right" class="w-6 h-6" />
-        </button>
+			<button
+				type="button"
+				aria-label="Next testimonial"
+				x-on:click="nextSlide()"
+				class="opacity-100 md:opacity-0 md:group-hover:opacity-100 duration-500 absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-opacity-80 transition-all shadow-lg"
+			>
+				<Icon name="bi:chevron-right" class="w-6 h-6" />
+			</button>
 
-        <!-- Dots Indicator -->
-        <div class="flex justify-center mt-4 gap-2">
-            {testimonials.map((_, index) => (
-            <button
-                type="button"
-                aria-label={`Go to testimonial ${index + 1}`}
-                x-on:click={`currentSlide = ${index}`}
-                class="h-2 rounded-full transition-all duration-300"
-                x-bind:class={`currentSlide === ${index} ? 'bg-primary w-8' : 'bg-dark/30 w-2'`}
-            />
-            ))}
-        </div>
-        </div>
-        <Brands />
-    </div>
-  </div>
+			<!-- Dots Indicator -->
+			<div class="flex justify-center mt-4 gap-2">
+				{
+					testimonials.map((_, index) => (
+						<button
+							type="button"
+							aria-label={`Go to testimonial ${index + 1}`}
+							x-on:click={`currentSlide = ${index}`}
+							class="h-2 rounded-full transition-all duration-300"
+							x-bind:class={`currentSlide === ${index} ? 'bg-primary w-8' : 'bg-dark/30 w-2'`}
+						/>
+					))
+				}
+			</div>
+		</div>
+	</div>
 </section>

@@ -1,10 +1,16 @@
 ---
-import MainLayout from "@src/layouts/MainLayout.astro";
-import HeadingAreasWeServe from "@src/components/HeadingAreasWeServe.astro";
-import AreasWeServeSection from "@src/components/AreasWeServeSection.astro";
+import AreasWeServeSection from '@src/components/AreasWeServeSection.astro'
+import HeadingAreasWeServe from '@src/components/HeadingAreasWeServe.astro'
+import HeadingPage from '@src/components/HeadingPage.astro'
+import MainLayout from '@src/layouts/MainLayout.astro'
 ---
 
 <MainLayout title="Areas We Serve">
-  <HeadingAreasWeServe />
-  <AreasWeServeSection />
+	<HeadingPage
+		title="Areas We Serve"
+		description="We are thrilled to offer our professional services to a variety of locations, and we want to ensure that you know exactly where we operate."
+		imageAlt="get quote"
+	/>
+	<HeadingAreasWeServe />
+	<AreasWeServeSection />
 </MainLayout>

@@ -1,194 +1,94 @@
 ---
-import MainLayout from "@src/layouts/MainLayout.astro";
-import AreasWeServeCard from "@src/components/AreasWeServeCard.astro";
-import { Icon } from "astro-icon/components";
-import { getCollection } from "astro:content";
-import type { GetStaticPaths } from "astro";
+import type { GetStaticPaths } from 'astro'
+import { Image } from 'astro:assets'
+import { getCollection } from 'astro:content'
+import { Icon } from 'astro-icon/components'
+import Button from '@src/components/Button.astro'
+import MainLayout from '@src/layouts/MainLayout.astro'
+import AreasWeServeCard from '@src/components/AreasWeServeCard.astro'
+import SideBySide from '@src/components/SideBySide.astro'
 
 export const getStaticPaths = (async () => {
-  const areas = await getCollection("serviceAreas");
-  return areas.map((item) => ({
-    params: { slug: item.slug },
-    props: { area: item },
-  }));
-}) satisfies GetStaticPaths;
+	const areas = await getCollection('serviceAreas')
+	return areas.map((item) => ({
+		params: { slug: item.slug },
+		props: { area: item }
+	}))
+}) satisfies GetStaticPaths
 
-const { area } = Astro.props;
-const { Content } = await area.render();
-const data = area.data;
+const { area } = Astro.props
+const { Content } = await area.render()
+const data = area.data
 
 // Get related equipment
-const allEquipment = await getCollection("serviceAreas");
-const related = allEquipment
-  .filter((item) => 
-    // item.data.category === data.category && 
-    item.slug !== area.slug &&
-    !item.data.draft
-  )
-  .slice(0, 4);
+const allAreas = await getCollection('serviceAreas')
+const related = allAreas
+	.filter(
+		(item) =>
+			// item.data.category === data.category &&
+			item.slug !== area.slug && !item.data.draft
+	)
+	.slice(0, 4)
 
 // Images for gallery
 // const galleryImages = data.images || [data.cover];
 ---
 
 <MainLayout title={data.title}>
-  <!-- Hero Section -->
-  <section class="relative py-16 lg:py-20 overflow-hidden bg-dark">
-    <div class="absolute inset-0 opacity-20">
-      <img 
-        src={data.cover} 
-        alt={data.title}
-        class="w-full h-full object-cover"
-      />
-    </div>
-    <div class="max-w-7xl mx-auto px-4 relative z-10">
-      <div class="text-center text-white">
-        <!-- <span class="inline-block bg-primary text-white px-6 py-2 rounded-full font-bold mb-6">
-          {data.label}
-        </span> -->
-        <h1 class="font-display text-4xl md:text-5xl mb-6">
-          Plumbing services in {data.title}
-        </h1>
-        <div class="inline-flex h-1 pipe-divider w-40 mx-auto"></div>
-      </div>
-    </div>
-  </section>
+	<!-- Hero Section -->
+	<section class="relative py-16 lg:py-20 overflow-hidden bg-dark">
+		<div class="absolute inset-0 opacity-20">
+			<Image src={data.cover} alt={data.title} class="w-full h-full object-cover" />
+		</div>
+		<div class="max-w-7xl mx-auto px-4 relative z-10">
+			<div class="text-center text-white">
+				<!-- <span class="inline-block bg-primary text-white px-6 py-2 rounded-full font-bold mb-6">
+					{data.label}
+				</span> -->
+				<h1 class="font-display text-4xl md:text-5xl mb-6">
+					Plumbing services in {data.title}
+				</h1>
+				<div class="inline-flex h-1 pipe-divider w-40 mx-auto"></div>
+			</div>
+		</div>
+	</section>
 
-  <!-- Content -->
-  <section class="py-16 lg:py-24 bg-white">
-    {/*<div class="max-w-7xl mx-auto px-4">
-      <div class="grid lg:grid-cols-2 lg:gap-12">
-        
-        <!-- Left: Image Gallery -->
-        <div class="relative" x-data={`{
-          mainImg: '${galleryImages[0]}',
-          thumbs: ${JSON.stringify(galleryImages)},
-          setMain(src) { this.mainImg = src }
-        }`}>
-          <div class="rounded-2xl overflow-hidden shadow-2xl aspect-4/3 mb-4">
-            <img 
-              x-bind:src="mainImg" 
-              alt="Equipment Image"
-              class="w-full h-full object-cover"
-            />
-          </div>
-          
-          <!-- Thumbnails -->
-          {galleryImages.length > 1 && (
-            <div class="grid grid-cols-4 gap-4 mb-10">
-              {galleryImages.map((img) => (
-                <button 
-                  x-on:click={`setMain('${img}')`}
-                  class="rounded-xl aspect-square overflow-hidden shadow-lg hover:ring-4 hover:ring-primary transition-all"
-                >
-                  <img 
-                    src={img} 
-                    alt="Small Equipment Image"
-                    class="w-full h-32 lg:h-40 object-cover"
-                  />
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
+	<!-- Intro -->
+	<SideBySide image={data.introImage} imageAlt="Alt" imageSide="right">
+		<h2 class="font-display text-4xl md:text-5xl text-dark mb-6">{data.heading}</h2>
+		{data.paragraphs.map((paragraph) => (
+			<p class="text-base lg:text-lg my-6">{paragraph}</p>
+		))}
+		<Button>
+			Message Us
+			<Icon name="bi:arrow-right" class="text-2xl" />
+		</Button>
+	</SideBySide>
 
-        <!-- Right: Info -->
-        <div class="relative">
-          <!-- Price Tag -->
-          <div class="bg-white overflow-hidden mb-6">
-            <div class="grid grid-cols-3 sm:text-center sm:border rounded-lg sm:divide-x">
-              <div class="sm:p-6">
-                <div class="text-2xl font-bold text-primary mb-1">
-                  ${data.pricing.daily}
-                </div>
-                <p class="text-steel-gray">Per Day</p>
-              </div>
-              <div class="sm:p-6">
-                <div class="text-2xl font-bold text-primary mb-1">
-                  ${data.pricing.weekly}
-                </div>
-                <p class="text-steel-gray">Per Week</p>
-              </div>
-              <div class="sm:p-6">
-                <div class="text-2xl font-bold text-primary mb-1">
-                  ${data.pricing.monthly}
-                </div>
-                <p class="text-steel-gray">Per Month</p>
-              </div>
-            </div>
-          </div>
+	<!-- Content -->
+	<section class="py-16 lg:py-24 bg-white">
+		<div class="max-w-4xl mx-auto px-4">
+			<div class="bg-white">
+				<div class="post-content">
+					<Content />
+				</div>
+			</div>
+		</div>
+	</section>
 
-          <!-- Quick Specs -->
-          <div class="space-y-4 mb-10">
-            {data.information.map((info) => (
-              <div class="flex justify-between py-3 border-b">
-                <span class="text-steel-gray">{info.label}</span>
-                <span class="font-bold text-right">{info.description}</span>
-              </div>
-            ))}
-            
-            {data.availability && (
-              <div class="flex justify-between py-3">
-                <span class="text-steel-gray">Availability</span>
-                <span class={`font-bold ${
-                  data.availability.status === "In Stock" 
-                    ? "text-green-600" 
-                    : data.availability.status === "Limited"
-                    ? "text-amber-600"
-                    : "text-red-600"
-                }`}>
-                  {data.availability.status}
-                  {data.availability.units && ` (${data.availability.units} units)`}
-                </span>
-              </div>
-            )}
-          </div>
-
-          <!-- CTA Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a 
-              href={data.cta.link}
-              class="bg-dark hover:bg-primary text-white font-bold py-4 px-8 rounded-lg text-center transition flex items-center justify-center gap-3"
-            >
-              <Icon name="bi:calculator" class="text-xl" />
-              {data.cta.text}
-            </a>
-            <a 
-              href="tel:9373690346"
-              class="border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold py-4 px-8 rounded-lg text-center transition flex items-center justify-center gap-3"
-            >
-              <Icon name="bi:telephone-fill" class="text-xl" />
-              Call Now
-            </a>
-          </div>
-        </div>
-      </div>
-    </div> */}
-
-    <!-- Description -->
-    <div class="max-w-7xl mx-auto px-4">
-      <div class="bg-white">
-        <!-- <h3 class="font-display text-3xl md:text-4xl text-dark mb-6">Description</h3> -->
-        <div class="post-content">
-          <Content />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Related Equipment -->
-  {related.length > 0 && (
-    <section class="pb-16 bg-white">
-      <div class="max-w-7xl mx-auto px-4">
-        <h2 class="font-display text-4xl font-bold text-center mb-12">
-          Related Equipment
-        </h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {related.map((item) => (
-            <AreasWeServeCard area={item} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
+	<!-- Related Service Areas -->
+	{
+		related.length > 0 && (
+			<section class="pb-16 bg-white">
+				<div class="max-w-7xl mx-auto px-4">
+					<h2 class="font-display text-4xl text-center mb-12">Related Service Areas</h2>
+					<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+						{related.map((item) => (
+							<AreasWeServeCard area={item} />
+						))}
+					</div>
+				</div>
+			</section>
+		)
+	}
 </MainLayout>

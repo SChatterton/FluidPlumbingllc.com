@@ -1,21 +1,21 @@
 ---
 export interface Props {
-  src?: string;
-  alt?: string;
-  width?: string;
-  href?: string;
-  class?: string;
+	src?: string
+	alt?: string
+	width?: string
+	href?: string
+	class?: string
 }
 
 const {
-  src = "/img/logo.webp",
-  alt = "Logo",
-  href = "/",
-  width = "max-w-32 md:max-w-48",
-  class: extraClass = "",
-} = Astro.props;
+	src = '/img/logo.webp',
+	alt = 'Logo',
+	href = '/',
+	width = 'max-w-24 xs:max-w-28 sm:max-w-32 lg:max-w-40 xl:max-w-48',
+	class: extraClass = ''
+} = Astro.props
 ---
 
 <a href={href} class={`inline-block ${extraClass}`}>
-  <img src={src} alt={alt} class={width} />
+	<img src={src} alt={alt} class={width} />
 </a>

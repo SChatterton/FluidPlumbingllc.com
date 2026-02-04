@@ -1,70 +1,52 @@
 ---
-import Button from "./Button.astro";
+import { Image } from 'astro:assets'
+import Button from './Button.astro'
+import BgImage from '@src/assets/Toilet-repair-kettering.jpeg'
 
 export interface CtaButton {
-  label: string;
-  href: string;
-  icon?: string;
-  variant?: "primary" | "light";
-  size?: "sm" | "md" | "lg";
-  class?: string;
+	label: string
+	href: string
+	icon?: string
+	variant?: 'primary' | 'light'
+	size?: 'sm' | 'md' | 'lg'
+	class?: string
 }
 
 export interface Props {
-  title?: string;
-  description?: string;
-  bgImage?: string;
-  button?: CtaButton;
+	title?: string
+	description?: string
+	bgImage?: string
+	button?: CtaButton
 }
 
 const {
-  title,
-  description,
-  bgImage = "/img/bg-cta.jpg",
-  button = {
-    label: "Call Us Now",
-    href: "tel:9373690346",
-    icon: "bi:telephone-fill",
-    variant: "primary",
-    size: "lg",
-    class: "px-10 py-4",
-  },
-} = Astro.props;
+	title,
+	description,
+	button = {
+		label: 'Call Us Now',
+		href: 'tel:9373690346',
+		icon: 'bi:telephone-fill',
+		variant: 'primary',
+		size: 'lg',
+		class: 'px-10 py-4'
+	}
+} = Astro.props
 ---
 
 <section class="relative bg-[#032533]">
-
-  <!-- BACKGROUND IMAGE -->
-  <div class="absolute inset-0 opacity-10">
-    <img src={bgImage} alt="CTA Background" class="w-full h-full object-cover" />
-  </div>
-
-  <div class="h-1 pipe-divider"></div>
-  <div class="max-w-7xl mx-auto px-4 py-24 relative z-10">
-    <div class="max-w-4xl mx-auto text-center">
-      {title && (
-        <h2 class="font-display text-4xl md:text-5xl text-white mb-6">
-          {title}
-        </h2>
-      )}
-
-      {description && (
-        <p class="text-xl text-metal-gray mb-10">
-          {description}
-        </p>
-      )}
-
-      <div class="flex flex-wrap justify-center gap-4">
-        <Button
-          href={button.href}
-          icon={button.icon}
-          variant={button.variant}
-          size={button.size}
-          class={button.class}
-        >
-          {button.label}
-        </Button>
-      </div>
-    </div>
-  </div>
+	<div class="absolute inset-0 opacity-10">
+		<Image src={BgImage} alt="CTA Background" class="w-full h-full object-cover" />
+	</div>
+	<div class="h-1 pipe-divider"></div>
+	<div class="max-w-7xl mx-auto px-4 py-24 relative z-10">
+		<div class="max-w-4xl mx-auto text-center">
+			{title && <h2 class="font-display text-4xl md:text-5xl text-white mb-6">{title}</h2>}
+			{description && <p class="text-xl text-metal-gray mb-10">{description}</p>}
+			<div class="flex flex-wrap justify-center gap-4">
+				<Button href={button.href} icon={button.icon} variant={button.variant} size={button.size} class={button.class}>
+					{button.label}
+				</Button>
+			</div>
+		</div>
+	</div>
 </section>

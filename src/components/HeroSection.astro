@@ -39,11 +39,11 @@ const {
 	},
 	secondaryButton = {
 		label: 'Schedule Service',
-		href: 'https://www.youtube.com/watch?v=4BzjUq921Y4',
+		href: 'https://online-booking.workiz.com/?ac=1a82aaf9d2ea23e707b046944106c5e8fb42ea71ebad2a64f83e2e02149fb69e',
 		icon: 'bi:wrench',
 		variant: 'light',
 		size: 'md',
-		class: 'text-primary'
+		class: 'text-primary glightbox'
 	}
 } = Astro.props
 ---
@@ -112,7 +112,7 @@ const {
 			<div class="max-w-3xl">
 				<div class="h-1 pipe-divider w-40 mb-6"></div>
 
-				<h1 class="font-display text-6xl md:text-7xl lg:text-8xl text-white mb-4 leading-none">
+				<h1 class="font-display text-5xl md:text-7xl lg:text-8xl text-white mb-4 leading-none">
 					{title}
 					<span class="text-primary-light">{highlight}</span>
 				</h1>
@@ -137,7 +137,7 @@ const {
 						)
 					}
 
-					{/* {
+					{
 						secondaryButton && (
 							<Button
 								href={secondaryButton.href}
@@ -149,7 +149,7 @@ const {
 								{secondaryButton.label}
 							</Button>
 						)
-					} */}
+					}
 				</div>
 			</div>
 		</div>

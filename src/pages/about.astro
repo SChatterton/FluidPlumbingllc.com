@@ -1,21 +1,21 @@
 ---
-import AboutPage from '@src/components/AboutPage.astro';
-import BenefitSection from '@src/components/BenefitSection.astro';
-import StatsSection from '@src/components/StatsSection.astro';
-import WhyChooseSection from '@src/components/WhyChooseSection.astro';
-import VisionSection from '@src/components/VisionSection.astro';
-import MainLayout from '@src/layouts/MainLayout.astro';
+import AboutPage from '@src/components/AboutPage.astro'
+import BenefitSection from '@src/components/BenefitSection.astro'
+import ContactSection from '@src/components/ContactSection.astro'
+import StatsSection from '@src/components/StatsSection.astro'
+import WhyChooseSection from '@src/components/WhyChooseSection.astro'
+// import VisionSection from '@src/components/VisionSection.astro'
+import MainLayout from '@src/layouts/MainLayout.astro'
 ---
+
 <MainLayout title="About Us">
-  <AboutPage />
-  <StatsSection />
-  <WhyChooseSection
-    title="Why choose Fluid Plumbing?"
-    description="We do the job right. We treat people right. That's it."
-    />
-  <BenefitSection />
-  <VisionSection
-    label="Why choose Fluid Plumbing?"
-    title="OUR VISION, MISSION & CORE VALUES"
-    />
+	<AboutPage />
+	<StatsSection />
+	<WhyChooseSection title="Why choose Fluid Plumbing?" description="We do the job right. We treat people right. That's it." />
+	<BenefitSection />
+	<ContactSection />
+	<!-- <VisionSection
+		label="Why choose Fluid Plumbing?"
+		title="OUR VISION, MISSION & CORE VALUES"
+		/> -->
 </MainLayout>

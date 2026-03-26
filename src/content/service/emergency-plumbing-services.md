@@ -2,10 +2,10 @@
 label: "Service"
 icon: "wrench"
 title: "Emergency Plumbing"
-cover: "@src/assets/Emergency-drain-cleaning-45429-1152x1536.jpg"
+cover: "@src/assets/Emergency-drain-cleaning-45429-1152x1536.webp"
 description: "Rapid-response emergency plumbing for leaks, bursts, overflows, and sudden failures, minimizing damage and restoring safety and function when you need help most."
 preview:
-  image: "@src/assets/Emergency-drain-cleaning-45429-1152x1536.jpg"
+  image: "@src/assets/Emergency-drain-cleaning-45429-1152x1536.webp"
   title: "Fast arrival, proper fixes"
   # description: "-----"
 benefits:

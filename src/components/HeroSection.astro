@@ -80,7 +80,15 @@ const {
 }
 
 <section id={id} class="relative overflow-hidden py-6">
-	<img src={bgimg} alt="hero background" class="absolute inset-0 w-full h-full object-cover" />
+	<img 
+  src={bgimg} 
+  alt="hero background" 
+  class="absolute inset-0 w-full h-full object-cover"
+  fetchpriority="high"
+  loading="eager"
+  width="1920"
+  height="1080"
+/>
 
 	{
 		/* SLIDES

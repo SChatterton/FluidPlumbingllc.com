@@ -2,10 +2,10 @@
 label: "Service"
 icon: "wrench"
 title: "Water Softeners"
-cover: "@src/assets/hard-water-deposit-on-shower-head-faucet.jpg"
+cover: "@src/assets/hard-water-deposit-on-shower-head-faucet.webp"
 description: "Water softener systems that reduce mineral buildup, protect plumbing and appliances, and leave your water feeling cleaner on skin, dishes, and fixtures."
 preview:
-  image: "@src/assets/hard-water-deposit-on-shower-head-faucet.jpg"
+  image: "@src/assets/hard-water-deposit-on-shower-head-faucet.webp"
   title: "Hard water is bad water"
   # description: "-----"
 benefits:

@@ -2,10 +2,10 @@
 label: "Service"
 icon: "wrench"
 title: "Plumbing"
-cover: "@src/assets/Faucet-replacement-45429.jpg"
+cover: "@src/assets/Faucet-replacement-45429.webp"
 description: "Full-service plumbing for repairs, replacements, and new installations, keeping your home’s water flowing reliably, efficiently, and up to modern code standards."
 preview:
-  image: "@src/assets/Faucet-replacement-45429.jpg"
+  image: "@src/assets/Faucet-replacement-45429.webp"
   title: "Your local plumbing expert in Dayton & Kettering"
 benefits:
   - "Faucet, toilet, and fixture replacements"

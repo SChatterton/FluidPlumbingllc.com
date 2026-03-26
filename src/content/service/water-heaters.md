@@ -2,10 +2,10 @@
 label: "Service"
 icon: "wrench"
 title: "Water Heaters"
-cover: "@src/assets/Water-heater-install-kettering.jpg"
+cover: @src/assets/Water-heater-install-kettering.webp
 description: "Installation, repair, and maintenance for traditional and tankless water heaters, ensuring consistent hot water, improved efficiency, and dependable performance year-round."
 preview:
-  image: "@src/assets/Water-heater-install-kettering.jpg"
+  image: "@src/assets/Water-heater-install-kettering.webp"
   title: "End-to-end water heater services"
   # description: "------"
 benefits:

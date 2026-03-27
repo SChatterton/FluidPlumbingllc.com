@@ -15,7 +15,7 @@ const { title, description, image = PipesImage, imageAlt = 'Page Heading Backgro
 <section class="relative py-16 lg:py-20 overflow-hidden">
 	<!-- BACKGROUND IMAGE -->
 	<div class="absolute inset-0">
-		<Image src={image} alt={imageAlt} class="w-full h-full object-cover" />
+		<Image src={image} alt={imageAlt} class="w-full h-full object-cover" fetchpriority="high" loading="eager" />
 		<div class="absolute inset-0 bg-linear-to-r from-[#032533]/90 via-[#032533]/70 to-[#032533]/60"></div>
 	</div>
 

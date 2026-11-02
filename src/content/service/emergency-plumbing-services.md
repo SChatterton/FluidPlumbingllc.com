@@ -17,7 +17,7 @@ serviceInfo:
   - label: "Coverage Area"
     description: "Dayton • Kettering • Centerville • Riverside • Oakwood • Fairborn"
   - label: "Timeframe"
-    description: "Immediate priority"
+    description: "Immediate 24/7 Availability"
   - label: "Available Discounts"
     description: "Senior • Military • First-time Customers"
 order: 3

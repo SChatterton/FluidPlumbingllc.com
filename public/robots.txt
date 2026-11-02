@@ -1,0 +1,26 @@
+
+# Fluid Plumbing LLC - Robots.txt
+# Website: https://fluidplumbingllc.com
+
+# Allow search engines and AI search crawlers
+User-agent: *
+Allow: /
+
+# Explicitly allow ChatGPT Search
+User-agent: OAI-SearchBot
+Allow: /
+
+# Explicitly allow Google
+User-agent: Googlebot
+Allow: /
+
+# Explicitly allow Bing
+User-agent: Bingbot
+Allow: /
+
+# Allow Perplexity search
+User-agent: PerplexityBot
+Allow: /
+
+
+  

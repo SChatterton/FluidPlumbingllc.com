@@ -29,7 +29,7 @@ const {
 		<meta name="author" content="Fluid Plumbing LLC" />
 		<meta name="robots" content="index, follow" />
 
-		<link rel="canonical" href={Astro.url?.href || 'https://fluidplumbingllc.com'} />
+		<link rel="canonical" href={`https://www.fluidplumbingllc.com${Astro.url.pathname}`} />
 		<link rel="icon" type="image/x-icon" href="/img/favicon.png" />
 
 		<link rel="sitemap" href="/sitemap-index.xml" />

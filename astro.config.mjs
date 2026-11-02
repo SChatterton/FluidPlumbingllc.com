@@ -10,7 +10,7 @@ import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://fluidplumbingllc.com',
+  site: 'https://www.fluidplumbingllc.com',
   base: '/',
   output: 'static',
 

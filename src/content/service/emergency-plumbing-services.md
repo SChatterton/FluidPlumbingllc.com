@@ -38,6 +38,6 @@ You won't get bounced around or put on hold. You'll speak directly with the owne
 - Water heater failures or leaks
 - Shut-off valve and emergency isolation
 
-We serve Kettering, Dayton, and nearby areas with emergency plumbing services when you need them most clean, fast, and done right the first time.
+Fluid Plumbing provides emergency plumbing services throughout Dayton, Kettering, Centerville, and surrounding communities. We respond quickly to plumbing emergencies and provide dependable repairs to help protect your home.
 
 Call now &mdash; we're ready when your plumbing isn't.

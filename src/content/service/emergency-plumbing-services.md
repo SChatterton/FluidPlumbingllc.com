@@ -34,7 +34,8 @@ You won't get bounced around or put on hold. You'll speak directly with the owne
 
 - Burst or leaking pipes
 - Overflowing toilets or backed-up drains
-- Sudden loss of water pressure or no water water heater failures or leaks
+- Sudden loss of water pressure or no water
+- Water heater failures or leaks
 - Shut-off valve and emergency isolation
 
 We serve Kettering, Dayton, and nearby areas with emergency plumbing services when you need them most clean, fast, and done right the first time.
